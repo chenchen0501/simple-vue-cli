@@ -1,4 +1,4 @@
-# simple-vue-cli
+# test-vue-cli3
 
 ## Project setup
 ```
