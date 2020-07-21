@@ -1,19 +1,20 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
+    <HelloWorld msg="Welcome to Your Vue.js App" />
     <div>env: {{ env }}</div>
+    <el-button type="primary">按钮</el-button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
+import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
   components: {
-    // HelloWorld
+    HelloWorld
   },
   data() {
     return {
@@ -22,7 +23,6 @@ export default {
   },
   mounted() {
     this.env = process.env
-    console.log('env:', process.env)
   }
 }
 </script>

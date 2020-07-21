@@ -6,13 +6,13 @@ function resolve(dir) {
 }
 
 module.exports = {
-  configureWebpack: {
-    resolve: {
-      alias: {
-        '@': resolve('src')
-      }
-    }
-  },
+  // configureWebpack: {
+  //   resolve: {
+  //     alias: {
+  //       '@': resolve('src')
+  //     }
+  //   }
+  // },
   chainWebpack: config => {
     // 增加首屏显示速度
     config.plugin('preload').tap(() => [
