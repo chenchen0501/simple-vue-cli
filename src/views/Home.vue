@@ -1,24 +1,24 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <div>env: {{ env }}</div>
-    <el-button type="primary">按钮</el-button>
+    <div style="text-align: left">
+      <el-button v-permission="ADD_BTN" type="primary">新增</el-button>
+      <el-button v-permission="DEL_BTN" type="primary">删除</el-button>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
   components: {
-    // HelloWorld
   },
   data() {
     return {
-      env: process.env
+      env: process.env,
+      ADD_BTN: 'ADD_BTN',
+      DEL_BTN: 'DEL_BTN'
     }
   },
   mounted() {

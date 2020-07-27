@@ -111,6 +111,6 @@ module.exports = {
   },
 
   css: {
-    requireModuleExtension: false
+    requireModuleExtension: true
   }
 }
