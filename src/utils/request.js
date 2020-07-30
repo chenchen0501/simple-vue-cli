@@ -15,35 +15,37 @@ service.interceptors.request.use(
   config => {
     config.headers['Authorization'] = 'Bearer ' + getToken()
     return config
-  },
-  error => {
-    Promise.reject(error)
   }
 )
 
 // response拦截器
 service.interceptors.response.use(
   response => {
-    const res = response.data
-    if (res.code === 10000) {
-      // 成功回调
-      return Promise.resolve(res)
-    } else {
-      if (res.code === 10004) {
-        // token 过期
-        router.replace({ path: '/login' })
-      }
-      Message({
-        message: res.msg,
-        type: 'error',
-        duration: 3 * 1000
-      })
-      return Promise.reject(res)
+    const { status } = response.data
+    const msg = response.data && response.data.message
+
+    if (status === 200) {
+      // 成功
+      return Promise.resolve(response.data)
     }
+
+    if (status === 10004) {
+      // token国企
+      router.replace({ path: '/login' })
+      return Promise.reject(msg)
+    }
+
+    if (status === 500) {
+      // 后端错误
+      Message.error(msg)
+      return Promise.reject(msg)
+    }
+
+    return Promise.resolve(response.data)
   },
   error => {
     Message({
-      message: error.msg,
+      message: error.msg || '系统错误',
       type: 'error',
       duration: 3 * 1000
     })
