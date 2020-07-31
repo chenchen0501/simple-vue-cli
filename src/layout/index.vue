@@ -1,46 +1,41 @@
+// 主布局
+
 <template>
   <el-container class="main-container">
     <el-aside class="left-area" :width="width">
-      <el-menu text-color="#fff" background-color="#000c17" active-text-color="#fff" class="el-menu-vertical-demo" :collapse="isCollapse">
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-location"></i>
-            <span slot="title">导航一</span>
-          </template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-        <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
-        </el-menu-item>
-        <el-menu-item index="3">
-          <i class="el-icon-document"></i>
-          <span slot="title">导航三</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-setting"></i>
-          <span slot="title">导航四</span>
-        </el-menu-item>
-      </el-menu>
+      <!-- 左侧菜单 -->
+      <SideBar />
     </el-aside>
     <el-main class="right-area">
-      <el-button type="primary" @click="split">切换</el-button>
+      <!-- 头部 -->
+      <Header />
+      <!-- 显示区域 -->
+      <Main>
+        <router-view />
+      </Main>
     </el-main>
   </el-container>
 </template>
 <script>
+import SideBar from './sideBar'
+import Header from './header'
+import Main from './mainArea'
+import { mapState } from 'vuex'
 export default {
+  components: { SideBar, Header, Main },
   data() {
     return {
-      isCollapse: false,
-      width: '200px'
     }
   },
+  computed: {
+    // 控制左侧菜单栏的开合
+    ...mapState('global', {
+      isCollapse: 'isCollapse',
+      width: 'sideBarWidth'
+    })
+  },
   methods: {
-    split() {
-      this.isCollapse = !this.isCollapse
-      this.width = this.isCollapse ? '60px' : '200px'
-    }
+
   }
 }
 </script>
@@ -49,19 +44,18 @@ export default {
   height: 100vh;
 }
 .left-area {
-  background-color: #000c17;
+  transition: width 0.3s;
   overflow: hidden;
-  transition: width 0.4s;
-}
-.el-menu {
-  border-right: 0;
 }
 .right-area{
-  background-color: #fff;
+  background-color: #f0f2f5;
+  padding: 0;
 }
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 500px;
+.el-menu-vertical-demo {
+  height: 100%;
+  &:not(.el-menu--collapse) {
+    width: 200px;
+  }
 }
 .el-menu--collapse {
   width: 60px;

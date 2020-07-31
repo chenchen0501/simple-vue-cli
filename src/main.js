@@ -6,6 +6,7 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/utils/directive' // 自定义指令
+import '@/styles/init.scss'
 import '@/styles/global.scss'
 
 Vue.use(ElementUI, {
