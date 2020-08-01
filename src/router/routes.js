@@ -2,45 +2,73 @@
 // 动态的路由（这部分路由会根据权限变化，默认只有两层路由）
 export const asyncRoutes = [
   {
-    path: '/a',
-    name: 'a',
-    icon: 'el-icon-location',
+    path: '/purchase',
+    name: 'purchase',
+    icon: 'el-icon-shopping-cart-2',
     meta: {
-      title: '页面a'
+      title: '采购'
     },
     component: () =>
-      import('../views/a.vue'),
-    children: [
-      {
-        path: 'q',
-        name: 'a1',
-        meta: {
-          title: '页面a1'
-        },
-        component: () =>
-          import('../views/a1.vue')
-      }
+      import('../views/purchase')
+  },
+  {
+    path: '/sell',
+    name: 'sell',
+    icon: 'el-icon-location',
+    meta: {
+      title: '销售'
+    },
+    component: () =>
+      import('../views/sell')
+  },
+  {
+    path: '/store',
+    name: 'store',
+    icon: 'el-icon-truck',
+    meta: {
+      title: '仓库'
+    },
+    component: () =>
+      import('../views/store')
+  },
+  {
+    path: '/report',
+    name: 'report',
+    icon: 'el-icon-tickets',
+    meta: {
+      title: '报表'
+    },
+    component: () =>
+      import('../views/report')
+  },
+  {
+    path: '/finance',
+    name: 'finance',
+    icon: 'el-icon-wallet',
+    meta: {
+      title: '财务'
+    },
+    component: () =>
+      import('../views/finance')
+  },
+  {
+    path: '/setting',
+    name: 'setting',
+    icon: 'el-icon-setting',
+    meta: {
+      title: '设置'
+    },
+    component: () =>
+      import('../views/setting'),
+    children: [{
+      path: 'goods',
+      name: 'goods',
+      meta: {
+        title: '商品管理'
+      },
+      component: () => import('../views/setting/goods')
+    }
     ]
-  },
-  {
-    path: '/b',
-    name: 'b',
-    icon: 'el-icon-location',
-    meta: {
-      title: '页面b'
-    },
-    component: () =>
-      import('../views/b.vue')
-  },
-  {
-    path: '/c',
-    name: 'c',
-    icon: 'el-icon-location',
-    meta: {
-      title: '页面c'
-    },
-    component: () =>
-      import('../views/c.vue')
   }
 ]
 
@@ -57,7 +85,7 @@ export default [
         meta: {
           title: '首页'
         },
-        component: () => import('../views/home.vue')
+        component: () => import('../views/Home.vue')
       },
       ...asyncRoutes
     ]

@@ -3,7 +3,7 @@
 <template>
   <el-menu text-color="#fff" background-color="#000c17" active-text-color="#fff" class="el-menu-vertical-demo" :collapse="isCollapse">
       <el-menu-item index="0" class="logo-menu-item">
-        <span slot="title" @click="$router.push('/')">logo</span>
+        <span slot="title" @click="$router.push('/')">首页</span>
         <i :class="['iconfont','icon-home_shousuo_icon',!isCollapse ? 'splitIcon-noCollapse':'splitIcon-collapse']" @click="split"></i>
       </el-menu-item>
     <template v-for="item in asyncRoutes">
