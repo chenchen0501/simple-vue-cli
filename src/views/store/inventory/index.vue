@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="form" :model="form" label-width="70px">
+    <el-form ref="form" :model="form" label-width="80px" label-suffix=":">
       <el-row :gutter="16">
         <el-col :span="6">
           <el-form-item label="仓库">
@@ -43,7 +43,7 @@
       <div>
         <el-button type="primary">打印</el-button>
         <el-button type="primary">导出</el-button>
-        <el-button type="primary">收起统计数据</el-button>
+        <el-button type="primary" @click="isShowRes = !isShowRes">{{ isShowRes ? '收起' : '显示' }}统计数据</el-button>
       </div>
       <div>
         <el-button type="primary" @click="handleFilter">查询</el-button>
@@ -51,7 +51,9 @@
       </div>
     </div>
     <div class="table-area">
-      <h3 class="gather-data">当前汇总结果：共有<span>3</span>个仓库， 库存总数量<span>53</span>， 库存总成本<span>100</span></h3>
+      <transition name="fade">
+      <h3 v-if="isShowRes" class="gather-data">当前汇总结果：共有<span>3</span>个仓库， 库存总数量<span>53</span>， 库存总成本<span>100</span></h3>
+      </transition>
       <el-table
       v-loading="tableLoading"
       border
@@ -117,6 +119,7 @@ export default {
   components: { checkMoal },
   mixins: [tableMixins],
   data: () => ({
+    isShowRes: true,
     visible: false,
     form: {},
     tableData: [{
@@ -157,5 +160,12 @@ export default {
 }
 .iconFont {
   cursor: pointer;
+  font-size: 16px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

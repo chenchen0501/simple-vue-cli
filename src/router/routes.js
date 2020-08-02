@@ -19,7 +19,16 @@ export const asyncRoutes = [
       title: '销售'
     },
     component: () =>
-      import('../views/sell')
+      import('../views/sell'),
+    children: [{
+      path: 'sell-list',
+      name: 'sell-list',
+      meta: {
+        title: '销售列表'
+      },
+      component: () => import('../views/sell/sellList')
+    }
+    ]
   },
   {
     path: '/store',
@@ -94,7 +103,7 @@ export default [
         meta: {
           title: '首页'
         },
-        component: () => import('../views/Home.vue')
+        component: () => import('../views/home.vue')
       },
       ...asyncRoutes
     ]

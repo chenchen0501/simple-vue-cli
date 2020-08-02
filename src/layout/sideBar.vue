@@ -14,7 +14,7 @@
         </el-menu-item>
       </router-link>
 
-      <el-submenu v-if="item.children && item.children.length" :key="item.name" index="item.name">
+      <el-submenu v-if="item.children && item.children.length" :key="item.name" :index="item.name">
         <template slot="title">
           <i :class="item.icon"></i>
           <span slot="title">{{ item.meta.title }}</span>
