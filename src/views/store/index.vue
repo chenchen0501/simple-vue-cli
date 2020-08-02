@@ -1,5 +1,5 @@
 <template>
-  <div>仓库</div>
+<router-view />
 </template>
 <script>
 export default {

@@ -29,7 +29,16 @@ export const asyncRoutes = [
       title: '仓库'
     },
     component: () =>
-      import('../views/store')
+      import('../views/store'),
+    children: [{
+      path: 'inventory',
+      name: 'inventory',
+      meta: {
+        title: '库存管理'
+      },
+      component: () => import('../views/store/inventory')
+    }
+    ]
   },
   {
     path: '/report',
