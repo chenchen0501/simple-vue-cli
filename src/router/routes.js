@@ -1,4 +1,3 @@
-
 // 动态的路由（这部分路由会根据权限变化，默认只有两层路由）
 export const asyncRoutes = [
   {
@@ -8,8 +7,7 @@ export const asyncRoutes = [
     meta: {
       title: '采购'
     },
-    component: () =>
-      import('../views/purchase')
+    component: () => import('../views/purchase')
   },
   {
     path: '/sell',
@@ -18,16 +16,16 @@ export const asyncRoutes = [
     meta: {
       title: '销售'
     },
-    component: () =>
-      import('../views/sell'),
-    children: [{
-      path: 'sell-list',
-      name: 'sell-list',
-      meta: {
-        title: '销售列表'
-      },
-      component: () => import('../views/sell/sellList')
-    }
+    component: () => import('../views/sell'),
+    children: [
+      {
+        path: 'sell-list',
+        name: 'sell-list',
+        meta: {
+          title: '销售列表'
+        },
+        component: () => import('../views/sell/sellList')
+      }
     ]
   },
   {
@@ -37,16 +35,16 @@ export const asyncRoutes = [
     meta: {
       title: '仓库'
     },
-    component: () =>
-      import('../views/store'),
-    children: [{
-      path: 'inventory',
-      name: 'inventory',
-      meta: {
-        title: '库存管理'
-      },
-      component: () => import('../views/store/inventory')
-    }
+    component: () => import('../views/store'),
+    children: [
+      {
+        path: 'inventory',
+        name: 'inventory',
+        meta: {
+          title: '库存管理'
+        },
+        component: () => import('../views/store/inventory')
+      }
     ]
   },
   {
@@ -56,8 +54,7 @@ export const asyncRoutes = [
     meta: {
       title: '报表'
     },
-    component: () =>
-      import('../views/report')
+    component: () => import('../views/report')
   },
   {
     path: '/finance',
@@ -66,8 +63,7 @@ export const asyncRoutes = [
     meta: {
       title: '财务'
     },
-    component: () =>
-      import('../views/finance')
+    component: () => import('../views/finance')
   },
   {
     path: '/setting',
@@ -76,16 +72,16 @@ export const asyncRoutes = [
     meta: {
       title: '设置'
     },
-    component: () =>
-      import('../views/setting'),
-    children: [{
-      path: 'goods',
-      name: 'goods',
-      meta: {
-        title: '商品管理'
-      },
-      component: () => import('../views/setting/goods')
-    }
+    component: () => import('../views/setting'),
+    children: [
+      {
+        path: 'goods',
+        name: 'goods',
+        meta: {
+          title: '商品管理'
+        },
+        component: () => import('../views/setting/goods')
+      }
     ]
   }
 ]
@@ -122,8 +118,6 @@ export default [
     path: '/404',
     name: '404',
     title: '页面404',
-    component: () =>
-      import('../views/404.vue')
+    component: () => import('../views/404.vue')
   }
 ]
-

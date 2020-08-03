@@ -2,7 +2,8 @@
 
 <template>
   <el-container class="main-container">
-    <el-aside class="left-area" :width="width">
+    <el-aside class="left-area"
+              :width="width">
       <!-- 左侧菜单 -->
       <SideBar />
     </el-aside>
@@ -23,7 +24,7 @@ import Main from './mainArea'
 import { mapState } from 'vuex'
 export default {
   components: { SideBar, Header, Main },
-  data() {
+  data () {
     return {
     }
   },
@@ -47,7 +48,7 @@ export default {
   transition: width 0.3s;
   overflow: hidden;
 }
-.right-area{
+.right-area {
   background-color: #f0f2f5;
   padding: 0;
 }
@@ -60,7 +61,7 @@ export default {
 .el-menu--collapse {
   width: 60px;
 }
-.el-menu-item:hover{
+.el-menu-item:hover {
   background-color: #1890ff !important;
 }
 </style>
