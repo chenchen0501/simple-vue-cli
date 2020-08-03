@@ -5,10 +5,9 @@
     <!-- 面包屑 -->
     <div class="left-area">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item
-          v-for="item in breadList"
-          :key="item.name"
-          :to="{ path: item.path }">
+        <el-breadcrumb-item v-for="item in breadList"
+                            :key="item.name"
+                            :to="{ path: item.path }">
           {{ item.meta.title }}
         </el-breadcrumb-item>
       </el-breadcrumb>
@@ -16,13 +15,24 @@
     <!-- 用户信息区域 -->
     <div class="right-area">
       <div class="user-area">
-        <el-avatar size="small" class="user-icon" icon="el-icon-user-solid"></el-avatar>
+        <el-dropdown @command="handleCommand">
+          <span class="el-dropdown-link">
+            <el-avatar size="small"
+                       class="user-icon"
+                       icon="el-icon-user-solid"></el-avatar>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="signout">退出登录</el-dropdown-item>
+            <el-dropdown-item command="changePw">修改密码</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
         用户a
       </div>
     </div>
   </div>
 </template>
 <script>
+import { clearToken } from '@/utils'
 export default {
   data: () => ({
     breadList: []
@@ -30,15 +40,21 @@ export default {
   computed: {
   },
   watch: {
-    $route() {
+    $route () {
       this.getBreadCrumbList()
     }
   },
-  created() {
+  created () {
     this.getBreadCrumbList()
   },
   methods: {
-    getBreadCrumbList() {
+    handleCommand (val) {
+      if (val === 'signout') {
+        clearToken()
+        this.$router.push('/login')
+      }
+    },
+    getBreadCrumbList () {
       this.breadList = this.$route.matched.filter(item => item.name !== 'main')
     }
   }
@@ -65,6 +81,7 @@ export default {
     align-items: center;
     margin-right: 10px;
     .user-icon {
+      cursor: pointer;
       margin: 0 10px 0 10px;
     }
   }

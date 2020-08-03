@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/utils/directive' // 自定义指令
 import '@/styles/init.scss'
 import '@/styles/global.scss'
+import '@/utils/permission'
 
 Vue.use(ElementUI, {
   size: 'mini'

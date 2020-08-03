@@ -63,6 +63,16 @@ export default [
     ]
   },
   {
+    path: '/login',
+    name: 'login',
+    icon: 'el-icon-location',
+    meta: {
+      title: '登录'
+    },
+    component: () =>
+      import('../views/login')
+  },
+  {
     path: '/404',
     name: '404',
     title: '页面404',
