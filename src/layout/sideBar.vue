@@ -1,27 +1,40 @@
 // 菜单栏
 
 <template>
-  <el-menu text-color="#fff" background-color="#000c17" active-text-color="#fff" class="el-menu-vertical-demo" :collapse="isCollapse">
-      <el-menu-item index="0" class="logo-menu-item">
-        <span slot="title" @click="$router.push('/')">logo</span>
-        <i :class="['iconfont','icon-home_shousuo_icon',!isCollapse ? 'splitIcon-noCollapse':'splitIcon-collapse']" @click="split"></i>
-      </el-menu-item>
+  <el-menu text-color="#fff"
+           background-color="#000c17"
+           active-text-color="#fff"
+           class="el-menu-vertical-demo"
+           :collapse="isCollapse">
+    <el-menu-item index="0"
+                  class="logo-menu-item">
+      <span slot="title"
+            @click="$router.push('/')">logo</span>
+      <i :class="['iconfont','icon-home_shousuo_icon',!isCollapse ? 'splitIcon-noCollapse':'splitIcon-collapse']"
+         @click="split"></i>
+    </el-menu-item>
     <template v-for="item in asyncRoutes">
-      <router-link v-if="!item.children || !item.children.length" :key="item.name" :to="item.path">
+      <router-link v-if="!item.children || !item.children.length"
+                   :key="item.name"
+                   :to="item.path">
         <el-menu-item :index="item.name">
           <i :class="item.icon"></i>
-          <span slot="title">{{ item.meta.title }}</span>
+          <span slot="title">{{ item.meta&&item.meta.title }}</span>
         </el-menu-item>
       </router-link>
 
-      <el-submenu v-if="item.children && item.children.length" :key="item.name" index="item.name">
+      <el-submenu v-if="item.children && item.children.length"
+                  :key="item.name"
+                  index="item.name">
         <template slot="title">
           <i :class="item.icon"></i>
-          <span slot="title">{{ item.meta.title }}</span>
+          <span slot="title">{{ item.meta&&item.meta.title }}</span>
         </template>
-        <router-link v-for="subItem in item.children" :key="subItem.name" :to="`${item.path}/${subItem.path}`">
+        <router-link v-for="subItem in item.children"
+                     :key="subItem.name"
+                     :to="`${item.path}/${subItem.path}`">
           <el-menu-item :index="subItem.path">
-            <span slot="title">{{ subItem.meta.title }}</span>
+            <span slot="title">{{ subItem.meta&&subItem.meta.title }}</span>
           </el-menu-item>
         </router-link>
       </el-submenu>
@@ -31,11 +44,11 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import { asyncRoutes } from '@/router/routes'
+import ls from '@/utils/localStorage'
 export default {
-  data() {
+  data () {
     return {
-      asyncRoutes
+      asyncRoutes: ls.get('routes') || []
     }
   },
   computed: {
@@ -43,10 +56,10 @@ export default {
       isCollapse: 'isCollapse'
     })
   },
-  mounted() {
+  mounted () {
   },
   methods: {
-    split() {
+    split () {
       this.$store.commit('global/splitCollapse')
     }
   }
@@ -62,7 +75,7 @@ export default {
 .el-menu--collapse {
   width: 60px;
 }
-.el-menu-item:hover:not(.logo-menu-item){
+.el-menu-item:hover:not(.logo-menu-item) {
   background-color: #1890ff !important;
 }
 .logo-menu-item {
@@ -73,7 +86,7 @@ export default {
     font-size: 16px;
     color: #909399;
   }
-   .splitIcon-collapse {
+  .splitIcon-collapse {
     transform: rotate(90deg);
     float: right;
     font-size: 16px;
