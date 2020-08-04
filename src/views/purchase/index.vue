@@ -1,5 +1,5 @@
 <template>
-  <div>采购</div>
+  <router-view />
 </template>
 <script>
 export default {
