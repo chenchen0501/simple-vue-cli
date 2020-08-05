@@ -8,7 +8,8 @@ export default {
   get: name => {
     return JSON.parse(localStorage.getItem(name))
   },
-  clear: name => {
+  remove: name => {
     localStorage.removeItem(name)
-  }
+  },
+
 }

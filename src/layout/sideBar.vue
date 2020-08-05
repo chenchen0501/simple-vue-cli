@@ -10,7 +10,7 @@
     <el-menu-item index="0"
                   class="logo-menu-item">
       <span slot="title"
-            @click="$router.push('/')">首页</span>
+            @click="$router.push('/main/home')">首页</span>
       <i :class="['iconfont','icon-home_shousuo_icon',!isCollapse ? 'splitIcon-noCollapse':'splitIcon-collapse']"
          @click="split"></i>
     </el-menu-item>
@@ -33,7 +33,7 @@
         </template>
         <router-link v-for="subItem in item.children"
                      :key="subItem.name"
-                     :to="`${item.path}/${subItem.path}`">
+                     :to="subItem.path">
           <el-menu-item :index="subItem.name">
             <span slot="title">{{ subItem.meta.title }}</span>
           </el-menu-item>

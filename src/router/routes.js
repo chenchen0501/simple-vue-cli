@@ -1,7 +1,7 @@
 // 动态的路由（这部分路由会根据权限变化，默认只有两层路由）
 export const asyncRoutes = [
   {
-    path: '/purchase',
+    path: '/main/purchase',
     name: 'purchase',
     icon: 'el-icon-shopping-cart-2',
     meta: {
@@ -10,7 +10,7 @@ export const asyncRoutes = [
     component: () => import('../views/purchase'),
     children: [
       {
-        path: 'orders',
+        path: '/main/purchase/orders',
         name: 'orders',
         meta: {
           title: '采购列表'
@@ -28,7 +28,7 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/sell',
+    path: '/main/sell',
     name: 'sell',
     icon: 'el-icon-location',
     meta: {
@@ -37,7 +37,7 @@ export const asyncRoutes = [
     component: () => import('../views/sell'),
     children: [
       {
-        path: 'sell-list',
+        path: '/main/sell/sell-list',
         name: 'sell-list',
         meta: {
           title: '销售列表'
@@ -47,7 +47,7 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/store',
+    path: '/main/store',
     name: 'store',
     icon: 'el-icon-truck',
     meta: {
@@ -56,7 +56,7 @@ export const asyncRoutes = [
     component: () => import('../views/store'),
     children: [
       {
-        path: 'inventory',
+        path: '/main/storeinventory',
         name: 'inventory',
         meta: {
           title: '库存管理'
@@ -66,7 +66,7 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/report',
+    path: '/main/report',
     name: 'report',
     icon: 'el-icon-tickets',
     meta: {
@@ -75,7 +75,7 @@ export const asyncRoutes = [
     component: () => import('../views/report')
   },
   {
-    path: '/finance',
+    path: '/main/finance',
     name: 'finance',
     icon: 'el-icon-wallet',
     meta: {
@@ -84,7 +84,7 @@ export const asyncRoutes = [
     component: () => import('../views/finance')
   },
   {
-    path: '/setting',
+    path: '/main/setting',
     name: 'setting',
     icon: 'el-icon-setting',
     meta: {
@@ -93,7 +93,7 @@ export const asyncRoutes = [
     component: () => import('../views/setting'),
     children: [
       {
-        path: 'goods',
+        path: '/main/setting/goods',
         name: 'goods',
         meta: {
           title: '商品管理'
@@ -102,40 +102,35 @@ export const asyncRoutes = [
       }
     ]
   }
-]
+];
 
 export default [
   {
-    path: '/',
-    name: 'main',
-    redirect: '/home',
-    component: () => import('@/layout'),
-    children: [
-      {
-        path: '/home',
-        name: 'home',
-        meta: {
-          title: '首页'
-        },
-        component: () => import('../views/home.vue')
-      },
-      ...asyncRoutes
-    ]
+    path: "/",
+    name: "/",
+    redirect: "/main",
+    component: () => import("@/layout"),
   },
   {
-    path: '/login',
-    name: 'login',
-    icon: 'el-icon-location',
+    path: "/login",
+    name: "login",
     meta: {
-      title: '登录'
+      title: "登录"
     },
-    component: () =>
-      import('../views/login')
+    component: () => import("../views/login")
   },
   {
-    path: '/404',
-    name: '404',
-    title: '页面404',
-    component: () => import('../views/404.vue')
+    path: "/changePw",
+    name: "changePw",
+    meta: {
+      title: "修改密码"
+    },
+    component: () => import("../views/login/changePw")
+  },
+  {
+    path: "/404",
+    name: "404",
+    title: "页面404",
+    component: () => import("../views/404.vue")
   }
-]
+];

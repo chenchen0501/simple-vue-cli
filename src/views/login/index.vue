@@ -4,19 +4,21 @@
       <el-form label-position="right"
                label-width="80px"
                label-suffix=":"
+               ref="form"
+               :rules="rules"
                :model="form">
         <h1 class="title">系统登录</h1>
-        <el-form-item>
+        <el-form-item prop="account">
           <el-input prefix-icon="el-icon-user"
-                    placeholder="请输入账号"
-                    v-model="form.name"></el-input>
+                    placeholder="请输入登录账号"
+                    v-model="form.account"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="pw">
           <el-input prefix-icon="el-icon-lock"
-                    placeholder="请输入密码"
+                    placeholder="请输入登录密码"
                     autocomplete="on"
                     show-password
-                    v-model="form.region"></el-input>
+                    v-model="form.pw"></el-input>
         </el-form-item>
       </el-form>
       <el-button size="medium"
@@ -27,15 +29,21 @@
   </div>
 </template>
 <script>
-import ls from '@/utils/localStorage'
 export default {
   data: () => ({
-    form: {}
+    form: {},
+    rules: {
+      account: [{ required: true, message: '请输入登录账号' }],
+      pw: [{ required: true, message: '请输入登录密码' }]
+    }
   }),
   methods: {
     login () {
-      ls.set('token', 'qqweqweqweqweqweqw')
-      this.$router.push('/')
+      this.$refs.form.validate(val => {
+        if (val) {
+          this.$store.dispatch('user/signIn', this.form)
+        }
+      })
     }
   }
 }

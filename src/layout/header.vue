@@ -4,7 +4,8 @@
   <div class="header-container">
     <!-- 面包屑 -->
     <div class="left-area">
-      <el-breadcrumb separator="/">
+      <el-breadcrumb class="breadArea"
+                     separator="/">
         <el-breadcrumb-item v-for="item in breadList"
                             :key="item.name"
                             :to="{ path: item.path }">
@@ -32,7 +33,7 @@
   </div>
 </template>
 <script>
-import { clearToken } from '@/utils'
+import { clearLs } from '@/utils'
 export default {
   data: () => ({
     breadList: []
@@ -50,8 +51,11 @@ export default {
   methods: {
     handleCommand (val) {
       if (val === 'signout') {
-        clearToken()
+        clearLs()
         this.$router.push('/login')
+      }
+      if (val === 'changePw') {
+        this.$router.push('/changePw')
       }
     },
     getBreadCrumbList () {
@@ -68,10 +72,12 @@ export default {
   width: calc(100% - 20px);
   height: 50px;
   background-color: #fff;
-  // box-shadow: 10px 10px 5px #888888;
 }
 .left-area {
   width: 50%;
+  .breadArea {
+    margin-left: 10px;
+  }
 }
 .right-area {
   width: 50%;

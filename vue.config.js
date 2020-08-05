@@ -6,13 +6,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-  // configureWebpack: {
-  //   resolve: {
-  //     alias: {
-  //       '@': resolve('src')
-  //     }
-  //   }
-  // },
+  lintOnSave: false,
   chainWebpack: config => {
     // set svg-sprite-loader
     config.module
