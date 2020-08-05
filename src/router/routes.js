@@ -18,7 +18,7 @@ export const asyncRoutes = [
         component: () => import('../views/purchase/orders')
       },
       {
-        path: 'add-purchase',
+        path: '/main/purchase/add-purchase',
         name: 'add-purchase',
         meta: {
           title: '新增采购单'
