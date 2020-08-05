@@ -1,7 +1,7 @@
 // 动态的路由（这部分路由会根据权限变化，默认只有两层路由）
 export const asyncRoutes = [
   {
-    path: "/a",
+    path: "/main/a",
     name: "a",
     icon: "el-icon-location",
     meta: {
@@ -10,7 +10,7 @@ export const asyncRoutes = [
     component: () => import("../views/a.vue"),
     children: [
       {
-        path: "q",
+        path: "/main/a/q",
         name: "a1",
         meta: {
           title: "页面a1"
@@ -20,7 +20,7 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: "/b",
+    path: "/main/b",
     name: "b",
     icon: "el-icon-location",
     meta: {
@@ -29,7 +29,7 @@ export const asyncRoutes = [
     component: () => import("../views/b.vue")
   },
   {
-    path: "/c",
+    path: "/main/c",
     name: "c",
     icon: "el-icon-location",
     meta: {
@@ -43,8 +43,8 @@ export default [
   {
     path: "/",
     name: "/",
-    redirect: '/main',
-    component: () => import("@/layout")
+    redirect: "/main",
+    component: () => import("@/layout"),
   },
   // {
   //   path: "/main",

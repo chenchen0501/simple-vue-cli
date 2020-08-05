@@ -1,36 +1,46 @@
 import router from "@/router";
-import { getToken } from "@/utils";
-import ls from "@/utils/localStorage";
+import store from "@/store";
+import { getToken, clearLs } from "@/utils";
+import { asyncRoutes as allRoutes } from '@/router/routes'
 
 router.beforeEach((to, from, next) => {
-  console.log(1);
+  // clearLs()
   if (getToken()) {
-    console.log(2);
-    if (to.path === "/main" && from.path === "/login") {
-      console.log(3);
-      const asyncRoutes = ls.get("routes");
-      router.addRoutes([
-        {
-          path: "/main",
-          name: "main",
-          redirect: "/main/home",
-          component: () => import("@/layout"),
-          children: [
+    if (to.path === "/login") {
+      next("/main");
+    } else {
+      // 防止刷新导致动态路由信息丢失
+      console.log('store routes', store.state.user.userInfo.routes)
+      if (!store.state.user.userInfo.routes.length) {
+        store.dispatch("user/getCurrentUserInfo").then(({ routes }) => {
+          router.addRoutes([
             {
-              path: "home",
-              name: "home",
-              meta: {
-                title: "首页"
-              },
-              component: () => import("../views/home.vue")
-            },
-            ...asyncRoutes
-          ]
-        }
-      ]);
-      next({ ...to, replace: true });
+              path: "/main",
+              name: "main",
+              redirect: "/main/home",
+              component: () => import("@/layout"),
+              children: [
+                {
+                  path: "/main/home",
+                  name: "home",
+                  meta: {
+                    title: "首页"
+                  },
+                  component: () => import("../views/home.vue")
+                },
+                ...routes
+              ]
+            }
+          ]);
+        });
+        console.log(-1)
+        next({ ...to, replace: true });
+        console.log(1)
+      } else {
+        next();
+        console.log(2)
+      }
     }
-    next();
   } else {
     if (to.path === "/login") {
       next();

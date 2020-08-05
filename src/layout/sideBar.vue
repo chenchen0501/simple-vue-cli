@@ -1,7 +1,8 @@
 // 菜单栏
 
 <template>
-  <el-menu text-color="#fff"
+  <el-menu unique-opened
+           text-color="#fff"
            background-color="#000c17"
            active-text-color="#fff"
            class="el-menu-vertical-demo"
@@ -9,7 +10,7 @@
     <el-menu-item index="0"
                   class="logo-menu-item">
       <span slot="title"
-            @click="$router.push('/')">logo</span>
+            @click="$router.push('/main/home')">首页</span>
       <i :class="['iconfont','icon-home_shousuo_icon',!isCollapse ? 'splitIcon-noCollapse':'splitIcon-collapse']"
          @click="split"></i>
     </el-menu-item>
@@ -19,22 +20,22 @@
                    :to="item.path">
         <el-menu-item :index="item.name">
           <i :class="item.icon"></i>
-          <span slot="title">{{ item.meta&&item.meta.title }}</span>
+          <span slot="title">{{ item.meta.title }}</span>
         </el-menu-item>
       </router-link>
 
       <el-submenu v-if="item.children && item.children.length"
                   :key="item.name"
-                  index="item.name">
+                  :index="item.name">
         <template slot="title">
           <i :class="item.icon"></i>
-          <span slot="title">{{ item.meta&&item.meta.title }}</span>
+          <span slot="title">{{ item.meta.title }}</span>
         </template>
         <router-link v-for="subItem in item.children"
                      :key="subItem.name"
-                     :to="`${item.path}/${subItem.path}`">
-          <el-menu-item :index="subItem.path">
-            <span slot="title">{{ subItem.meta&&subItem.meta.title }}</span>
+                     :to="subItem.path">
+          <el-menu-item :index="subItem.name">
+            <span slot="title">{{ subItem.meta.title }}</span>
           </el-menu-item>
         </router-link>
       </el-submenu>
@@ -44,11 +45,11 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import ls from '@/utils/localStorage'
+import { asyncRoutes } from '@/router/routes'
 export default {
   data () {
     return {
-      asyncRoutes: ls.get('routes') || []
+      asyncRoutes
     }
   },
   computed: {
