@@ -2,6 +2,7 @@
   <el-dialog title="商品编辑"
              :visible.sync="modalVisible"
              width="50%"
+             :close-on-click-modal="false"
              @open="open"
              @close="close">
     <el-form :model="form"
@@ -154,10 +155,26 @@
                       label="2">停用</el-radio>
           </el-form-item>
         </el-col>
+        <el-col :span="12">
+          <el-form-item label="图片">
+            <el-upload class="avatar-uploader"
+                       action="https://jsonplaceholder.typicode.com/posts/"
+                       :show-file-list="false"
+                       :on-success="handleAvatarSuccess"
+                       :before-upload="beforeAvatarUpload">
+              <img v-if="imageUrl"
+                   :src="imageUrl"
+                   class="avatar">
+              <i v-else
+                 class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+        </el-col>
       </el-row>
     </el-form>
     <span slot="footer"
           class="dialog-footer">
+      <el-button type="primary">继续添加</el-button>
       <el-button type="primary"
                  @click="modalVisible = false">提交</el-button>
       <el-button @click="close">取消</el-button>
@@ -169,6 +186,7 @@ import modalMixins from '@/mixins/modalMixins'
 export default {
   mixins: [modalMixins],
   data: () => ({
+    imageUrl: '',
     form: {
       isOpen: '1'
     },
@@ -181,6 +199,46 @@ export default {
   computed: {
   },
   methods: {
+    handleAvatarSuccess (res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    }
   }
 }
 </script>
+<style lang="scss" scoped>
+.avatar-uploader /deep/ .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+}
+.avatar {
+  width: 70px;
+  height: 70px;
+  display: block;
+}
+</style>

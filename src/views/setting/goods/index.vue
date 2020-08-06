@@ -87,7 +87,8 @@
     </el-form>
     <div class="table-op">
       <div>
-        <el-button type="primary">添加</el-button>
+        <el-button type="primary"
+                   @click="visible = true">添加</el-button>
         <el-button type="primary">导入</el-button>
         <el-button type="primary">导出</el-button>
         <el-button type="primary">批量采购</el-button>
@@ -164,8 +165,9 @@
                          prop="name"
                          label="操作"
                          width="120">
-          <template>
-            <el-button type="text">销售</el-button>
+          <template slot-scope="scope">
+            <el-button type="text"
+                       @click="sell(scope.row)">销售</el-button>
             <el-button type="text">采购</el-button>
             <el-button type="text">修改</el-button>
           </template>
@@ -182,14 +184,22 @@
                      @current-change="handleCurrentChange">
       </el-pagination>
     </div>
+    <SelectGoods :visible="visible"
+                 @close="visible = false" />
+    <sellModal :visible="sellVisible"
+               @close="sellVisible = false" />
   </div>
 </template>
 <script>
 import tableMixins from '@/mixins/tableMixins'
-
+import SelectGoods from '@/components/selectGoods'
+import sellModal from './sellModal'
 export default {
+  components: { SelectGoods, sellModal },
   mixins: [tableMixins],
   data: () => ({
+    sellVisible: false,
+    visible: false,
     form: {},
     tableData: [{
       name: '商品',
@@ -216,6 +226,9 @@ export default {
   methods: {
     handleSelectionChange (val) {
       console.log(val)
+    },
+    sell (row) {
+      this.sellVisible = true
     }
   }
 }

@@ -69,8 +69,8 @@
     </div>
     <div class="table-area">
       <el-table border
-                height="200"
                 :data="tableData"
+                height="300"
                 @selection-change="handleSelectionChange">
         <el-table-column label="序号"
                          align="center"
@@ -89,9 +89,8 @@
         <el-table-column prop="address"
                          align="center"
                          label="商品">
-          <template slot-scope="scope">
-            <el-button type="text"
-                       @click="selectGood(scope.row)">点击选择</el-button>
+          <template>
+            <el-button type="text">点击选择</el-button>
           </template>
         </el-table-column>
         <el-table-column prop="name"
@@ -134,21 +133,14 @@
       </h3>
     </div>
     <div class="footer-area">
-      <div class="btn-container">
-        <el-button type="primary">草稿</el-button>
-        <el-button type="primary">采购</el-button>
-      </div>
+      <el-button type="primary">草稿</el-button>
+      <el-button type="primary">采购</el-button>
     </div>
-    <SelectGoods :visible="visible"
-                 @close="visible = false" />
   </div>
 </template>
 <script>
-import SelectGoods from '@/components/selectGoods'
 export default {
-  components: { SelectGoods },
   data: () => ({
-    visible: false,
     total: 0,
     rules: {
       provider: [{ required: true, message: '请选择供应商' }],
@@ -196,9 +188,6 @@ export default {
       const { num = 0, price = 0 } = row
       row.total = num * price
     },
-    selectGood (row) {
-      this.visible = true
-    }
   }
 }
 </script>
@@ -215,12 +204,12 @@ export default {
   margin-bottom: 20px;
 }
 .footer-area {
+  text-align: center;
   position: absolute;
-  bottom: 20px;
-  .btn-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  bottom: 10px;
+  left: 50%;
+  height: 30px;
+  background: #fff;
+  z-index: 10;
 }
 </style>
