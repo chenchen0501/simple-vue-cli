@@ -13,5 +13,6 @@
   background-color: #fff;
   border-radius: 10px;
   padding: 10px;
+  overflow: auto;
 }
 </style>

@@ -38,6 +38,9 @@ export default {
       return new Promise((resolve, reject) => {
         // todo 登录接口
 
+        // 清楚所有缓存
+        ls.clear()
+
         // 设置token
         ls.set("token", "qqweqweqweqweqweqw");
 
