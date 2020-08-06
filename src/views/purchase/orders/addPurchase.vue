@@ -69,7 +69,7 @@
     </div>
     <div class="table-area">
       <el-table border
-                height="300"
+                height="200"
                 :data="tableData"
                 @selection-change="handleSelectionChange">
         <el-table-column label="序号"
@@ -90,7 +90,8 @@
                          align="center"
                          label="商品">
           <template slot-scope="scope">
-            <el-button type="text" @click="selectGood(scope.row)">点击选择</el-button>
+            <el-button type="text"
+                       @click="selectGood(scope.row)">点击选择</el-button>
           </template>
         </el-table-column>
         <el-table-column prop="name"
@@ -133,10 +134,13 @@
       </h3>
     </div>
     <div class="footer-area">
-      <el-button type="primary">草稿</el-button>
-      <el-button type="primary">采购</el-button>
+      <div class="btn-container">
+        <el-button type="primary">草稿</el-button>
+        <el-button type="primary">采购</el-button>
+      </div>
     </div>
-    <SelectGoods :visible="visible" @close="visible = false" />
+    <SelectGoods :visible="visible"
+                 @close="visible = false" />
   </div>
 </template>
 <script>
@@ -211,7 +215,12 @@ export default {
   margin-bottom: 20px;
 }
 .footer-area {
-  margin-top: 20px;
-  text-align: center;
+  position: absolute;
+  bottom: 20px;
+  .btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 </style>
