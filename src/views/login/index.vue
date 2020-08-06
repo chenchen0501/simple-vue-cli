@@ -41,7 +41,9 @@ export default {
     login () {
       this.$refs.form.validate(val => {
         if (val) {
-          this.$store.dispatch('user/signIn', this.form)
+          this.$store.dispatch('user/signIn', this.form).then(() => {
+            this.$router.replace("/main");
+          })
         }
       })
     }

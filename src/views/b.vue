@@ -32,7 +32,7 @@
     </el-form>
     <div class="table-op">
       <div>
-        <el-button type="primary">新增</el-button>
+        <el-button type="primary" v-permission="'del_btn'">新增</el-button>
       </div>
       <div>
         <el-button type="primary">查询</el-button>

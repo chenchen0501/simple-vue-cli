@@ -41,10 +41,6 @@ export default {
         // 设置token
         ls.set("token", "qqweqweqweqweqweqw");
 
-        const userInfo = { name: "cc", routes: allRoutes, btns: ["del_btn"] }; // todo 为后端获取
-        commit("setUserInfo", userInfo);
-
-        router.replace("/main");
         resolve();
       });
     },
@@ -64,7 +60,7 @@ export default {
           currentUserInfo = oldUserInfo;
           commit("setUserInfo", oldUserInfo);
         } else {
-          const userInfo = { name: "cc", routes: allRutes, btns: ["del_btn"] }; // todo 为后端获取
+          const userInfo = { name: "cc", routes: allRoutes, btns: ["del_btn"] }; // todo 为后端获取
           commit("setUserInfo", userInfo);
           currentUserInfo = userInfo;
         }
