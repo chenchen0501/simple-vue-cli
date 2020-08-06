@@ -1,7 +1,6 @@
 import router from "@/router";
 import store from "@/store";
 import { getToken, clearLs } from "@/utils";
-import { asyncRoutes as allRoutes } from '@/router/routes'
 
 router.beforeEach((to, from, next) => {
   // clearLs()
@@ -9,7 +8,6 @@ router.beforeEach((to, from, next) => {
     if (to.path === "/login") {
       next("/main");
     } else {
-      // 防止刷新导致动态路由信息丢失
       if (!store.state.user.userInfo.routes.length) {
         store.dispatch("user/getCurrentUserInfo").then(({ routes }) => {
           router.addRoutes([

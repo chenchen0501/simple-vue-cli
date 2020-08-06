@@ -41,10 +41,6 @@ export default {
         // 设置token
         ls.set("token", "qqweqweqweqweqweqw");
 
-        const userInfo = { name: "cc", routes: allRoutes, btns: ["del_btn"] }; // todo 为后端获取
-        commit("setUserInfo", userInfo);
-
-        router.replace("/main");
         resolve();
       });
     },
