@@ -25,6 +25,10 @@
                  type="primary"
                  @click="login"
                  style="width: 100%">登录</el-button>
+      <div class="btn">
+        <el-button type="text"
+                   @click="$router.push({path:'/register'})">点我注册</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -72,6 +76,10 @@ export default {
     width: 30%;
     /deep/ .el-input__inner {
       height: 47px;
+    }
+    .btn {
+      text-align: right;
+      margin-top: 10px;
     }
   }
 }

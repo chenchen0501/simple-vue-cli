@@ -128,6 +128,14 @@ export default [
     component: () => import("../views/login/changePw")
   },
   {
+    path: "/register",
+    name: "register",
+    meta: {
+      title: "注册"
+    },
+    component: () => import("../views/login/register")
+  },
+  {
     path: "/404",
     name: "404",
     title: "页面404",

@@ -1,6 +1,7 @@
 import router from "@/router";
 import store from "@/store";
 import { getToken, clearLs } from "@/utils";
+import data from '@/utils/data'
 
 router.beforeEach((to, from, next) => {
   // clearLs()
@@ -36,7 +37,7 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    if (to.path === "/login") {
+    if (data.whiteRoutes.includes(to.path)) {
       next();
     } else {
       next("/login");
