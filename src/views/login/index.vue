@@ -72,6 +72,7 @@ export default {
       color: #fff;
       margin-bottom: 30px;
       font-weight: bold;
+      text-align: center;
     }
     width: 30%;
     /deep/ .el-input__inner {

@@ -8,7 +8,7 @@
                :rules="rules"
                :model="form">
         <h1 class="title">注册</h1>
-        <el-form-item label=""
+        <el-form-item label="账号"
                       prop="oldPw">
           <el-input placeholder="请输入原密码"
                     v-model="form.oldPw"></el-input>
@@ -68,9 +68,10 @@ export default {
   height: 35px;
 }
 .login-container {
+  background-color: #2d3a4b;
   display: flex;
   justify-content: center;
-  margin-top: 10%;
+  align-items: center;
   height: 100vh;
   .login-area {
     .btn-area {
@@ -79,9 +80,11 @@ export default {
       justify-content: center;
     }
     .title {
+      color: #fff;
       padding-left: 120px;
       margin-bottom: 30px;
       font-weight: bold;
+      text-align: center;
     }
     width: 30%;
     margin-right: 130px;
