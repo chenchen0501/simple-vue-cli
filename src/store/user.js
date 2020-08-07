@@ -1,22 +1,7 @@
 // 全局变量
 import ls from "@/utils/localStorage";
-import router from "@/router";
 import { asyncRoutes as allRoutes } from "@/router/routes";
-
-function filterRoutes (AllRoutes, permissionRoutes) {
-  let afterFilterRoutes = []
-  AllRoutes.forEach(ai => {
-    permissionRoutes.forEach(pi => {
-      if (ai.name === pi.name) {
-        if (ai.children && ai.children.length > 0) {
-          ai.children = filterRoutes(ai.children, pi.children)
-        }
-        afterFilterRoutes.push(ai)
-      }
-    })
-  })
-  return afterFilterRoutes
-}
+import { filterRoutes } from '@/utils'
 
 export default {
   namespaced: true,
@@ -51,6 +36,7 @@ export default {
     // 获取当前用户信息 (如：缓存丢失情况下调用)
     getCurrentUserInfo({ commit }, token) {
       return new Promise((resolve, reject) => {
+        console.log('11')
         const oldUserInfo = ls.get("userInfo");
 
         // 判断缓存是否存在
