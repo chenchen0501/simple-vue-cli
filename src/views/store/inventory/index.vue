@@ -7,40 +7,40 @@
       <el-row :gutter="16">
         <el-col :span="6">
           <el-form-item label="仓库">
-            <el-input v-model="listQuery.name"
-                      placeholder="请输入商品名称、货号"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="商品">
-            <el-select v-model="listQuery.region"
-                       placeholder="请选择分类">
-              <el-option label="区域一"
-                         value="shanghai"></el-option>
-              <el-option label="区域二"
-                         value="beijing"></el-option>
+            <el-select v-model="listQuery.store"
+                       placeholder="请选择仓库">
+              <el-option v-for="item in storeArr"
+                         :value="item.value"
+                         :key="item.value"
+                         :label="item.label"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="6">
+          <el-form-item label="商品">
+            <el-input placeholder="请输入名称、货号、条码"
+                      v-model="listQuery.good"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
           <el-form-item label="分类">
-            <el-select v-model="listQuery.region"
-                       placeholder="请选择采购员">
-              <el-option label="区域一"
-                         value="shanghai"></el-option>
-              <el-option label="区域二"
-                         value="beijing"></el-option>
+            <el-select v-model="listQuery.type"
+                       placeholder="请选择分类">
+              <el-option v-for="item in typeArr"
+                         :value="item.value"
+                         :key="item.value"
+                         :label="item.label"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="库存">
-            <el-select v-model="listQuery.region"
-                       placeholder="请选择产品开发">
-              <el-option label="区域一"
-                         value="shanghai"></el-option>
-              <el-option label="区域二"
-                         value="beijing"></el-option>
+            <el-select v-model="listQuery.inventory"
+                       placeholder="请选择分类">
+              <el-option v-for="item in inventoryArr"
+                         :value="item.value"
+                         :key="item.value"
+                         :label="item.label"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
@@ -73,11 +73,14 @@
       <el-table v-loading="tableLoading"
                 border
                 :data="tableData">
+        <el-table-column type="index"
+                         align="center"
+                         label="序号">
+        </el-table-column>
         <el-table-column prop="address"
                          align="center"
                          label="名称">
         </el-table-column>
-
         <el-table-column prop="name"
                          align="center"
                          label="货号">
@@ -129,6 +132,9 @@ export default {
   components: { checkMoal },
   mixins: [tableMixins],
   data: () => ({
+    inventoryArr: [],
+    typeArr: [],
+    storeArr: [],
     isShowRes: true,
     visible: false,
     form: {},

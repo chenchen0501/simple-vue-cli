@@ -1,8 +1,9 @@
 <template>
-  <el-dialog title="商品编辑"
+  <el-dialog :title="`商品${goodId ? '编辑' : '新增'}`"
              :visible.sync="modalVisible"
              width="50%"
              :close-on-click-modal="false"
+             top="5vh"
              @open="open"
              @close="close">
     <el-form :model="form"
@@ -14,6 +15,7 @@
           <el-form-item label="名称"
                         prop="name">
             <el-input v-model="form.name"
+                      placeholder="请输入商品名称"
                       :rows="3"></el-input>
           </el-form-item>
         </el-col>
@@ -21,6 +23,7 @@
           <el-form-item label="货号"
                         prop="no">
             <el-input v-model="form.no"
+                      placeholder="请输入商品货号"
                       :rows="3"></el-input>
           </el-form-item>
         </el-col>
@@ -28,7 +31,7 @@
         <el-col :span="12">
           <el-form-item label="分类">
             <el-select v-model="form.type"
-                       placeholder="请选择">
+                       placeholder="请选择商品分类">
               <el-option v-for="item in options"
                          :key="item.value"
                          :label="item.label"
@@ -63,7 +66,8 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="库存预警">
+          <el-form-item label="库存预警下限"
+                        class="redLabel">
             <el-input-number class="full-width"
                              v-model="form.warning"></el-input-number>
           </el-form-item>
@@ -96,13 +100,19 @@
         <el-col :span="12">
           <el-form-item label="采购价格">
             <el-input-number class="full-width"
-                             v-model="form.warning"></el-input-number>
+                             v-model="form.price"></el-input-number>
           </el-form-item>
         </el-col>
-
+        <el-col :span="12">
+          <el-form-item label="采购数量">
+            <el-input-number class="full-width"
+                             v-model="form.num"></el-input-number>
+          </el-form-item>
+        </el-col>
         <el-col :span="12">
           <el-form-item label="供应商">
             <el-input v-model="form.name"
+                      placeholder="请输入供应商"
                       :rows="3"></el-input>
           </el-form-item>
         </el-col>
@@ -134,6 +144,7 @@
         <el-col :span="12">
           <el-form-item label="采购链接">
             <el-input v-model="form.name"
+                      placeholder="请输入采购链接"
                       :rows="3"></el-input>
           </el-form-item>
         </el-col>
@@ -156,7 +167,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="图片">
+          <el-form-item label="商品图片">
             <el-upload class="avatar-uploader"
                        action="https://jsonplaceholder.typicode.com/posts/"
                        :show-file-list="false"
@@ -174,9 +185,10 @@
     </el-form>
     <span slot="footer"
           class="dialog-footer">
-      <el-button type="primary">继续添加</el-button>
       <el-button type="primary"
-                 @click="modalVisible = false">提交</el-button>
+                 @click="continueAdd">继续添加</el-button>
+      <el-button type="primary"
+                 @click="submit">提交</el-button>
       <el-button @click="close">取消</el-button>
     </span>
   </el-dialog>
@@ -184,11 +196,19 @@
 <script>
 import modalMixins from '@/mixins/modalMixins'
 export default {
+  props: {
+    goodId: {
+      type: String,
+      default: () => ''
+    }
+  },
   mixins: [modalMixins],
   data: () => ({
     imageUrl: '',
     form: {
-      isOpen: '1'
+      isOpen: '1',
+      price: 0,
+      num: 0
     },
     options: [],
     rules: {
@@ -199,6 +219,8 @@ export default {
   computed: {
   },
   methods: {
+    continueAdd () { },
+    submit () { },
     handleAvatarSuccess (res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
     },

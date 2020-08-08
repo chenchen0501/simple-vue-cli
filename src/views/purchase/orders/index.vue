@@ -13,6 +13,9 @@
               v-model="listQuery.date"
               style="width: 100%"
               type="datetimerange"
+              clearable
+              value-format="yyyy-MM-dd"
+              format="yyyy-MM-dd"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
             />
@@ -39,6 +42,8 @@
             <el-select
               v-model="listQuery.status"
               placeholder="请选择状态"
+              multiple
+              clearable
             >
               <el-option
                 v-for="item in statusArr"

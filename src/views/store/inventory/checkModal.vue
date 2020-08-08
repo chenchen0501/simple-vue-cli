@@ -18,6 +18,7 @@
       </el-form-item>
       <el-form-item label="盘点数量">
         <el-input-number :precision="0"
+                         v-model="form.num"
                          :min="0"></el-input-number>
       </el-form-item>
       <el-form-item label="备注">
@@ -39,6 +40,7 @@ import modalMixins from '@/mixins/modalMixins'
 export default {
   mixins: [modalMixins],
   data: () => ({
+    form: { num: 0 }
   }),
   computed: {
   },

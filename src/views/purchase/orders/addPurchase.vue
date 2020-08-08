@@ -40,6 +40,9 @@
             <el-date-picker v-model="form.date"
                             style="width: 100%"
                             type="datetimerange"
+                            clearable
+                            value-format="yyyy-MM-dd"
+                            format="yyyy-MM-dd"
                             start-placeholder="开始日期"
                             end-placeholder="结束日期" />
           </el-form-item>
@@ -69,6 +72,8 @@
     </div>
     <div class="table-area">
       <el-table border
+                show-summary
+                :summary-method="getSummaries"
                 :data="tableData"
                 height="300"
                 @selection-change="handleSelectionChange">
@@ -161,9 +166,9 @@ export default {
     isShowRes: true,
     form: {},
     tableData: [{
-      name: '商品',
-      address: '上海仓库',
-      date: '日期'
+      num: 0,
+      price: 0,
+      total: 0
     }]
   }),
   watch: {
@@ -177,8 +182,37 @@ export default {
     }
   },
   methods: {
+    getSummaries ({ columns, data }) {
+      const sums = []
+      const allNum = data.reduce((pre, cur) => {
+        const preNum = isNaN(pre) ? 0 : pre
+        return preNum + cur.num
+      }, 0)
+      const allToal = data.reduce((pre, cur) => {
+        const preTotal = isNaN(pre) ? 0 : pre
+        return preTotal + cur.total
+      }, 0)
+
+      columns.forEach((item, index) => {
+        const { property } = item
+        if (index === 0) {
+          sums[0] = '总计'
+        }
+        if (property === 'num') {
+          sums[index] = allNum
+        }
+        if (property === 'total') {
+          sums[index] = allToal
+        }
+      })
+      return sums
+    },
     add () {
-      this.tableData.push({})
+      this.tableData.push({
+        num: 0,
+        price: 0,
+        total: 0
+      })
     },
     del (index) {
       this.tableData.splice(index, 1)

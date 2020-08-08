@@ -2,15 +2,25 @@
   display: flex;
   justify-content: space-between;
 }
+
 .full-width {
   width: 100%;
 }
+
 .el-select {
   width: 100%;
 }
+
 .table-area {
   margin: 10px 0 10px 0;
 }
+
 .pagination-area {
   float: right;
+}
+
+.redLabel {
+  /deep/ .el-form-item__label {
+    color: #F56C6C
+  }
 }

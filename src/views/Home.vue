@@ -1,5 +1,5 @@
 <template>
   <div class="a">
-    <h1>this is home</h1>
+    <h1>公告</h1>
   </div>
 </template>

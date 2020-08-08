@@ -105,6 +105,8 @@
       <el-table v-loading="tableLoading"
                 :data="tableData"
                 border
+                :cell-style="cellStyleFn"
+                :header-cell-style="cellStyleFn"
                 style="width: 100%"
                 @selection-change="handleSelectionChange">
         <el-table-column label="选择"
@@ -112,6 +114,19 @@
                          type="selection"
                          fixed="left"
                          width="50">
+        </el-table-column>
+        <el-table-column fixed="left"
+                         align="center"
+                         prop="name"
+                         label="操作"
+                         width="120">
+          <template slot-scope="scope">
+            <el-button type="text"
+                       @click="sell(scope.row)">销售</el-button>
+            <el-button type="text">采购</el-button>
+            <el-button type="text"
+                       @click="editGood(scope.row)">修改</el-button>
+          </template>
         </el-table-column>
         <el-table-column prop="address"
                          align="center"
@@ -160,18 +175,7 @@
                          prop="address"
                          label="仓库">
         </el-table-column>
-        <el-table-column fixed="right"
-                         align="center"
-                         prop="name"
-                         label="操作"
-                         width="120">
-          <template slot-scope="scope">
-            <el-button type="text"
-                       @click="sell(scope.row)">销售</el-button>
-            <el-button type="text">采购</el-button>
-            <el-button type="text">修改</el-button>
-          </template>
-        </el-table-column>
+
       </el-table>
     </div>
     <div class="pagination-area">
@@ -185,6 +189,7 @@
       </el-pagination>
     </div>
     <SelectGoods :visible="visible"
+                 :goodId="goodId"
                  @close="visible = false" />
     <sellModal :visible="sellVisible"
                @close="sellVisible = false" />
@@ -198,10 +203,12 @@ export default {
   components: { SelectGoods, sellModal },
   mixins: [tableMixins],
   data: () => ({
+    goodId: '',
     sellVisible: false,
     visible: false,
     form: {},
     tableData: [{
+      goodId: 1, 
       name: '商品',
       address: '上海仓库',
       date: '日期'
@@ -229,6 +236,15 @@ export default {
     },
     sell (row) {
       this.sellVisible = true
+    },
+    cellStyleFn ({ columnIndex }) {
+      if (columnIndex === 9) {
+        return 'color: #F56C6C'
+      }
+    },
+    editGood (row) {
+      this.goodId = row.goodId
+      this.visible = true
     }
   }
 }
