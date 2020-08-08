@@ -8,17 +8,17 @@
                :rules="rules"
                :model="form">
         <h1 class="title">系统登录</h1>
-        <el-form-item prop="account">
+        <el-form-item prop="username">
           <el-input prefix-icon="el-icon-user"
                     placeholder="请输入登录账号"
-                    v-model="form.account"></el-input>
+                    v-model="form.username"></el-input>
         </el-form-item>
-        <el-form-item prop="pw">
+        <el-form-item prop="password">
           <el-input prefix-icon="el-icon-lock"
                     placeholder="请输入登录密码"
                     autocomplete="on"
                     show-password
-                    v-model="form.pw"></el-input>
+                    v-model="form.password"></el-input>
         </el-form-item>
       </el-form>
       <el-button size="medium"
@@ -37,8 +37,8 @@ export default {
   data: () => ({
     form: {},
     rules: {
-      account: [{ required: true, message: '请输入登录账号' }],
-      pw: [{ required: true, message: '请输入登录密码' }]
+      username: [{ required: true, message: '请输入登录账号' }],
+      password: [{ required: true, message: '请输入登录密码' }]
     }
   }),
   methods: {

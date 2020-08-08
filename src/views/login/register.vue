@@ -9,15 +9,20 @@
                :model="form">
         <h1 class="title">注册</h1>
         <el-form-item label="账号"
-                      prop="oldPw">
-          <el-input placeholder="请输入原密码"
-                    v-model="form.oldPw"></el-input>
+                      prop="username">
+          <el-input placeholder="请输入账号"
+                    v-model="form.username"></el-input>
+        </el-form-item>
+        <el-form-item label="手机号"
+                      prop="phone">
+          <el-input placeholder="请输入手机号"
+                    v-model="form.phone"></el-input>
         </el-form-item>
         <el-form-item label="新密码"
-                      prop="newPw">
+                      prop="password">
           <el-input placeholder="请输入新密码"
                     show-password
-                    v-model="form.newPw">
+                    v-model="form.password">
           </el-input>
         </el-form-item>
         <el-form-item label="再次输入新密码"
@@ -30,7 +35,7 @@
       <div class="btn-area">
         <el-button size="medium"
                    type="primary"
-                   @click="submit">确定</el-button>
+                   @click="submit">确定并登入</el-button>
         <el-button size="medium"
                    @click="$router.go(-1)">取消</el-button>
       </div>
@@ -39,12 +44,14 @@
 </template>
 <script>
 import ls from '@/utils/localStorage'
+import api from '@/api'
 export default {
   data: () => ({
     form: {},
     rules: {
-      oldPw: [{ required: true, message: '请输入原密码' }],
-      newPw: [{ required: true, message: '请输入新密码' }],
+      username: [{ required: true, message: '请输入原密码' }],
+      phone: [{ required: true, message: '请输入手机号' }],
+      password: [{ required: true, message: '请输入新密码' }],
       rePeatNewPw: [{ required: true, message: '请再次输入新密码' }]
     }
   }),
@@ -52,11 +59,13 @@ export default {
     submit () {
       this.$refs.form.validate(val => {
         if (val) {
-          if (this.form.newPw === this.form.rePeatNewPw) {
+          if (this.form.password !== this.form.rePeatNewPw) {
             this.$message.error('两次输入的新密码不一致')
             return
           }
-          // 修改密码api
+          api.registry(this.form).then(res => {
+            console.log(res)
+          })
         }
       })
     }

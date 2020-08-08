@@ -1,7 +1,8 @@
 // 全局变量
 import ls from "@/utils/localStorage";
 import { asyncRoutes as allRoutes } from "@/router/routes";
-import { filterRoutes } from '@/utils'
+import { filterRoutes } from "@/utils";
+import api from "@/api";
 
 export default {
   namespaced: true,
@@ -21,22 +22,26 @@ export default {
     // 登录
     signIn({ commit }, signInfo) {
       return new Promise((resolve, reject) => {
-        // todo 登录接口
+        api
+          .login(signInfo)
+          .then(() => {
+            // 清楚所有缓存
+            ls.clear();
 
-        // 清楚所有缓存
-        ls.clear()
+            // 设置token
+            ls.set("token", "qqweqweqweqweqweqw");
 
-        // 设置token
-        ls.set("token", "qqweqweqweqweqweqw");
-
-        resolve();
+            resolve();
+          })
+          .catch(() => {
+            reject();
+          });
       });
     },
 
     // 获取当前用户信息 (如：缓存丢失情况下调用)
     getCurrentUserInfo({ commit }, token) {
       return new Promise((resolve, reject) => {
-        console.log('11')
         const oldUserInfo = ls.get("userInfo");
 
         // 判断缓存是否存在
@@ -54,7 +59,7 @@ export default {
           currentUserInfo = userInfo;
         }
         const routes = filterRoutes(allRoutes, currentUserInfo.routes);
-        resolve({...currentUserInfo, routes});
+        resolve({ ...currentUserInfo, routes });
       });
     }
   }

@@ -1,10 +1,16 @@
 import request from '@/utils/request'
 
 export default {
-  testAjax: params => {
+  login: params => {
     return request.get({
-      url: 'test/get',
+      url: '/login',
       params
     })
-  }
+  },
+  registry: params => {
+    return request.get({
+      url: '/registry',
+      params
+    })
+  },
 }
