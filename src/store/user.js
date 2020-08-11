@@ -22,9 +22,9 @@ export default {
     // 登录
     signIn({ commit }, signInfo) {
       return new Promise((resolve, reject) => {
-        api
-          .login(signInfo)
-          .then(() => {
+        // api
+        //   .login(signInfo)
+        //   .then(() => {
             // 清楚所有缓存
             ls.clear();
 
@@ -32,10 +32,10 @@ export default {
             ls.set("token", "qqweqweqweqweqweqw");
 
             resolve();
-          })
-          .catch(() => {
-            reject();
-          });
+          // })
+          // .catch(() => {
+          //   reject();
+          // });
       });
     },
 

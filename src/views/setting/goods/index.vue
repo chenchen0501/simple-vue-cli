@@ -7,13 +7,13 @@
       <el-row :gutter="16">
         <el-col :span="6">
           <el-form-item label="商品">
-            <el-input v-model="listQuery.name"
+            <el-input v-model="listQuery.goodsName"
                       placeholder="请输入商品名称、货号"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="分类">
-            <el-select v-model="listQuery.region"
+            <el-select v-model="listQuery.goodsTypeId"
                        placeholder="请选择分类">
               <el-option label="区域一"
                          value="shanghai"></el-option>
@@ -24,7 +24,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="采购员">
-            <el-select v-model="listQuery.region"
+            <el-select v-model="listQuery.operatorId"
                        placeholder="请选择采购员">
               <el-option label="区域一"
                          value="shanghai"></el-option>
@@ -35,7 +35,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="产品开发">
-            <el-select v-model="listQuery.region"
+            <el-select v-model="listQuery.developerId"
                        placeholder="请选择产品开发">
               <el-option label="区域一"
                          value="shanghai"></el-option>
@@ -46,6 +46,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="仓库">
+            <!-- todo -->
             <el-select v-model="listQuery.region"
                        placeholder="请选择仓库">
               <el-option label="区域一"
@@ -57,13 +58,13 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="供应商">
-            <el-input v-model="listQuery.name"
+            <el-input v-model="listQuery.supplierName"
                       placeholder="请输入供应商名称"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="库存">
-            <el-select v-model="listQuery.region"
+            <el-select v-model="listQuery.stockNumber"
                        placeholder="请选择库存">
               <el-option label="区域一"
                          value="shanghai"></el-option>
@@ -74,6 +75,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="发货地">
+            <!-- todo -->
             <el-select v-model="listQuery.region"
                        placeholder="请选择发货地">
               <el-option label="区域一"

@@ -13,6 +13,7 @@
       </el-row>
     </template>
     <el-form :model="form"
+             ref="form"
              label-width="100px"
              :rules="rules"
              label-suffix=":">
@@ -29,6 +30,7 @@
               <el-form-item label="数量"
                             class="redLabel"
                             prop="no">
+                <!-- todo -->
                 <el-input-number v-model="form.no"
                                  class="full-width"
                                  :min="0"
@@ -37,23 +39,24 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="销售账号"
-                            prop="name">
+                            prop="sellCode">
                 <el-input placeholder="请输入销售账号"
-                          v-model="form.name"></el-input>
+                          v-model="form.sellCode"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="销售金额"
-                            prop="no">
+                            prop="price">
                 <el-input-number :min="0"
                                  :controls="false"
                                  class="full-width"
-                                 v-model="form.no"></el-input-number>
+                                 v-model="form.price"></el-input-number>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="商品分类"
                             prop="name">
+                <!-- todo -->
                 <el-select v-model="form.type"
                            placeholder="请选择">
                   <el-option v-for="item in options"
@@ -66,22 +69,22 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="虎牙ID"
-                            prop="no">
+                            prop="yahooId">
                 <el-input placeholder="请输入虎牙ID"
-                          v-model="form.no"></el-input>
+                          v-model="form.yahooId"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="交易编号"
-                            prop="name">
+                            prop="saleCode">
                 <el-input placeholder="请输入交易编号"
-                          v-model="form.name"></el-input>
+                          v-model="form.saleCode"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="平台"
-                            prop="no">
-                <el-select v-model="form.type"
+                            prop="saleplatId">
+                <el-select v-model="form.saleplatId"
                            placeholder="请选择">
                   <el-option v-for="item in options"
                              :key="item.value"
@@ -94,6 +97,7 @@
             <el-col :span="12">
               <el-form-item label="订单状态"
                             prop="name">
+                <!-- todo -->
                 <el-select v-model="form.type"
                            placeholder="请选择">
                   <el-option v-for="item in options"
@@ -106,17 +110,17 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="物流方式"
-                            prop="no">
-                <el-radio v-model="form.isOpen"
+                            prop="deliveryId">
+                <el-radio v-model="form.deliveryId"
                           label="1">中通</el-radio>
-                <el-radio v-model="form.isOpen"
+                <el-radio v-model="form.deliveryId"
                           label="2">顺丰</el-radio>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="建单时间"
-                            prop="name">
-                <el-date-picker v-model="form.date"
+                            prop="paymentDate">
+                <el-date-picker v-model="form.paymentDate"
                                 type="date"
                                 value-format="yyyy-MM-dd"
                                 format="yyyy-MM-dd"
@@ -128,8 +132,8 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="付款时间"
-                            prop="no">
-                <el-date-picker v-model="form.date"
+                            prop="paymentDate">
+                <el-date-picker v-model="form.paymentDate"
                                 type="date"
                                 format="yyyy-MM-dd"
                                 style="width: 100%"
@@ -140,8 +144,8 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="发货时间"
-                            prop="name">
-                <el-date-picker v-model="form.date"
+                            prop="deliveryDate">
+                <el-date-picker v-model="form.deliveryDate"
                                 type="date"
                                 format="yyyy-MM-dd"
                                 style="width: 100%"
@@ -153,6 +157,7 @@
             <el-col :span="12">
               <el-form-item label="客服"
                             prop="no">
+                <!-- todo -->
                 <el-input placeholder="请输入客服"
                           v-model="form.no"></el-input>
               </el-form-item>
@@ -160,6 +165,7 @@
             <el-col :span="12">
               <el-form-item label="产品开发"
                             prop="name">
+                <!-- todo -->
                 <el-input placeholder="请输入产品开发"
                           v-model="form.name"></el-input>
               </el-form-item>
@@ -167,6 +173,7 @@
             <el-col :span="12">
               <el-form-item label="备注"
                             prop="no">
+                <!-- todo -->
                 <el-input type="textarea"
                           :rows="3"
                           placeholder="请输入备注"
@@ -180,21 +187,22 @@
           <el-row :gutter="16">
             <el-col :span="12">
               <el-form-item label="转单号"
-                            prop="name">
+                            prop="transferCode">
                 <el-input placeholder="请输入转单号"
-                          v-model="form.name"></el-input>
+                          v-model="form.transferCode"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="原单号"
-                            prop="no">
+                            prop="trackCode">
                 <el-input placeholder="请输入原单号"
-                          v-model="form.no"></el-input>
+                          v-model="form.trackCode"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="重量"
                             prop="name">
+                <!-- todo -->
                 <el-input-number class="full-width"
                                  v-model="form.name"></el-input-number>
               </el-form-item>
@@ -202,6 +210,7 @@
             <el-col :span="12">
               <el-form-item label="运费"
                             prop="no">
+                <!-- todo -->
                 45
               </el-form-item>
             </el-col>
@@ -209,6 +218,7 @@
               <el-form-item label="收件人"
                             class="redLabel"
                             prop="name">
+                <!-- todo -->
                 <el-input placeholder="请输入收件人"
                           v-model="form.name"></el-input>
               </el-form-item>
@@ -217,6 +227,7 @@
               <el-form-item label="邮编"
                             class="redLabel"
                             prop="no">
+                <!-- todo -->
                 <el-input placeholder="请输入邮编"
                           v-model="form.no"></el-input>
               </el-form-item>
@@ -225,6 +236,7 @@
               <el-form-item label="地址"
                             class="redLabel"
                             prop="name">
+                <!-- todo -->
                 <el-input placeholder="请输入地址"
                           v-model="form.name"></el-input>
               </el-form-item>
@@ -233,6 +245,7 @@
               <el-form-item label="手机"
                             class="redLabel"
                             prop="no">
+                <!-- todo -->
                 <el-input placeholder="请输入手机号"
                           v-model="form.no"></el-input>
               </el-form-item>
@@ -240,6 +253,7 @@
             <el-col :span="12">
               <el-form-item label="片甲名"
                             prop="name">
+                <!-- todo -->
                 <el-input placeholder="请输入片甲名"
                           v-model="form.name"></el-input>
               </el-form-item>
@@ -251,17 +265,20 @@
     <span slot="footer"
           class="dialog-footer">
       <el-button type="primary"
-                 @click="modalVisible = false">保存</el-button>
+                 @click="submit">保存</el-button>
       <el-button @click="close">取消</el-button>
     </span>
   </el-dialog>
 </template>
 <script>
 import modalMixins from '@/mixins/modalMixins'
+import api from '@/api'
+
 export default {
   mixins: [modalMixins],
   data: () => ({
     options: [],
+    loading: false,
     imageUrl: '',
     form: {
       isOpen: '1'
@@ -275,6 +292,19 @@ export default {
   computed: {
   },
   methods: {
+    submit () {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.loading = true
+          api.createOrder(this.form).then(() => {
+            this.$message.success('订单创建成功')
+            this.close()
+          }).catch(() => {
+            this.loading = false
+          })
+        }
+      })
+    },
     handleAvatarSuccess (res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
     },

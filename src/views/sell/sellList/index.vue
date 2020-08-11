@@ -7,13 +7,13 @@
       <el-row :gutter="16">
         <el-col :span="6">
           <el-form-item label="销售账号">
-            <el-input v-model="listQuery.name"
+            <el-input v-model="listQuery.sellCode"
                       placeholder="请输入销售账号"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="分类">
-            <el-select v-model="listQuery.region"
+            <el-select v-model="listQuery.goodsTypeId"
                        placeholder="请选择分类">
               <el-option label="区域一"
                          value="shanghai"></el-option>
@@ -24,7 +24,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="订单状态">
-            <el-select v-model="listQuery.region"
+            <el-select v-model="listQuery.orderStatusId"
                        placeholder="请选择订单状态">
               <el-option label="区域一"
                          value="shanghai"></el-option>
@@ -35,8 +35,9 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="建单起止日期">
-            <el-date-picker v-model="listQuery.orderStart"
+            <el-date-picker v-model="listQuery.createDate"
                             type="daterange"
+                            value-format="yyyy-MM-dd"
                             range-separator="~"
                             style="width: 100%"
                             start-placeholder="开始日期"
@@ -52,19 +53,20 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="雅虎ID">
-            <el-input v-model="listQuery.title"
+            <el-input v-model="listQuery.yahooId"
                       placeholder="请输入雅虎ID"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="交易编号">
-            <el-input v-model="listQuery.name"
+            <el-input v-model="listQuery.saleCode"
                       placeholder="请输入交易编号"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="发货起止日期">
-            <el-date-picker v-model="listQuery.orderEnd"
+            <el-date-picker v-model="listQuery.orderDate"
+                            value-format="yyyy-MM-dd"
                             type="daterange"
                             range-separator="~"
                             style="width: 100%"
@@ -75,25 +77,25 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="收件人">
-            <el-input v-model="listQuery.name"
+            <el-input v-model="listQuery.addresseeName"
                       placeholder="请输入收件人"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="转单号">
-            <el-input v-model="listQuery.name"
+            <el-input v-model="listQuery.transferCode"
                       placeholder="请输入转单号"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="原单号">
-            <el-input v-model="listQuery.name"
+            <el-input v-model="listQuery.trackCode"
                       placeholder="请输入原单号"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="销售平台">
-            <el-select v-model="listQuery.region"
+            <el-select v-model="listQuery.saleplatId"
                        placeholder="请选择销售平台">
               <el-option label="区域一"
                          value="shanghai"></el-option>
@@ -200,7 +202,7 @@
 </template>
 <script>
 import tableMixins from '@/mixins/tableMixins'
-
+import api from '@/api'
 export default {
   mixins: [tableMixins],
   data: () => ({
@@ -227,6 +229,36 @@ export default {
       date: '日期'
     }]
   }),
+  created () {
+    this.tableFn = api.querySell
+  },
+  watch: {
+    'listQuery.createDate': {
+      handler (val) {
+        if (val) {
+          this.listQuery.orderStartDate = val[0]
+          this.listQuery.orderEndDate = val[0]
+        } else {
+          delete this.listQuery.orderStartDate
+          delete this.listQuery.orderEndDate
+        }
+      },
+      deep: true
+    },
+
+    'listQuery.orderDate': {
+      handler (val) {
+        if (val) {
+          this.listQuery.deliveryStartDate = val[0]
+          this.listQuery.deliveryStartDate = val[0]
+        } else {
+          delete this.listQuery.deliveryStartDate
+          delete this.listQuery.deliveryStartDate
+        }
+      },
+      deep: true
+    }
+  },
   methods: {
     handleSelectionChange (val) {
       console.log(val)

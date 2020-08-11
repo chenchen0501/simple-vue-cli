@@ -1,4 +1,5 @@
 <template>
+  <!-- 库存查询 -->
   <div>
     <el-form ref="form"
              :model="form"
@@ -7,7 +8,7 @@
       <el-row :gutter="16">
         <el-col :span="6">
           <el-form-item label="仓库">
-            <el-select v-model="listQuery.store"
+            <el-select v-model="listQuery.depositoryId"
                        placeholder="请选择仓库">
               <el-option v-for="item in storeArr"
                          :value="item.value"
@@ -19,7 +20,7 @@
         <el-col :span="6">
           <el-form-item label="商品">
             <el-input placeholder="请输入名称、货号、条码"
-                      v-model="listQuery.good"></el-input>
+                      v-model="listQuery.goodsName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">

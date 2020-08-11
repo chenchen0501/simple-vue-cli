@@ -7,22 +7,23 @@
              @open="open"
              @close="close">
     <el-form :model="form"
+             ref="form"
              label-width="100px"
              :rules="rules"
              label-suffix=":">
       <el-row :gutter="16">
         <el-col :span="12">
           <el-form-item label="名称"
-                        prop="name">
-            <el-input v-model="form.name"
+                        prop="goodsName">
+            <el-input v-model="form.goodsName"
                       placeholder="请输入商品名称"
                       :rows="3"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="货号"
-                        prop="no">
-            <el-input v-model="form.no"
+                        prop="goodsCode">
+            <el-input v-model="form.goodsCode"
                       placeholder="请输入商品货号"
                       :rows="3"></el-input>
           </el-form-item>
@@ -30,7 +31,7 @@
 
         <el-col :span="12">
           <el-form-item label="分类">
-            <el-select v-model="form.type"
+            <el-select v-model="form.goodsTypeId"
                        placeholder="请选择商品分类">
               <el-option v-for="item in options"
                          :key="item.value"
@@ -42,7 +43,7 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="采购员">
-            <el-select v-model="form.type"
+            <el-select v-model="form.operatorId"
                        placeholder="请选择">
               <el-option v-for="item in options"
                          :key="item.value"
@@ -55,7 +56,7 @@
 
         <el-col :span="12">
           <el-form-item label="产品开发">
-            <el-select v-model="form.type"
+            <el-select v-model="form.developerId"
                        placeholder="请选择">
               <el-option v-for="item in options"
                          :key="item.value"
@@ -69,11 +70,12 @@
           <el-form-item label="库存预警下限"
                         class="redLabel">
             <el-input-number class="full-width"
-                             v-model="form.warning"></el-input-number>
+                             v-model="form.stockWarning"></el-input-number>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="仓库">
+            <!-- todo -->
             <el-select v-model="form.type"
                        placeholder="请选择">
               <el-option v-for="item in options"
@@ -87,7 +89,7 @@
 
         <el-col :span="12">
           <el-form-item label="发货方式">
-            <el-select v-model="form.type"
+            <el-select v-model="form.deliveryId"
                        placeholder="请选择">
               <el-option v-for="item in options"
                          :key="item.value"
@@ -100,24 +102,25 @@
         <el-col :span="12">
           <el-form-item label="采购价格">
             <el-input-number class="full-width"
-                             v-model="form.price"></el-input-number>
+                             v-model="form.purchasePrice"></el-input-number>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="采购数量">
+            <!-- todo -->
             <el-input-number class="full-width"
                              v-model="form.num"></el-input-number>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="供应商">
-            <el-input v-model="form.name"
-                      placeholder="请输入供应商"
-                      :rows="3"></el-input>
+            <el-input v-model="form.supplierName"
+                      placeholder="请输入供应商"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="发货地">
+            <!-- todo -->
             <el-select v-model="form.type"
                        placeholder="请选择">
               <el-option v-for="item in options"
@@ -131,7 +134,7 @@
 
         <el-col :span="12">
           <el-form-item label="库存状态">
-            <el-select v-model="form.type"
+            <el-select v-model="form.stockState"
                        placeholder="请选择">
               <el-option v-for="item in options"
                          :key="item.value"
@@ -143,14 +146,14 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="采购链接">
-            <el-input v-model="form.name"
-                      placeholder="请输入采购链接"
-                      :rows="3"></el-input>
+            <el-input v-model="form.purchaseUrl"
+                      placeholder="请输入采购链接"></el-input>
           </el-form-item>
         </el-col>
 
         <el-col :span="12">
           <el-form-item label="创建产品时间">
+            <!-- todo -->
             <el-date-picker v-model="form.date"
                             type="date"
                             style="width: 100%"
@@ -160,14 +163,15 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="状态">
-            <el-radio v-model="form.isOpen"
-                      label="1">启用</el-radio>
-            <el-radio v-model="form.isOpen"
-                      label="2">停用</el-radio>
+            <el-radio v-model="form.status"
+                      :label="1">启用</el-radio>
+            <el-radio v-model="form.status"
+                      :label="2">停用</el-radio>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="商品图片">
+            <!-- todo -->
             <el-upload class="avatar-uploader"
                        action="https://jsonplaceholder.typicode.com/posts/"
                        :show-file-list="false"
@@ -186,15 +190,19 @@
     <span slot="footer"
           class="dialog-footer">
       <el-button type="primary"
-                 @click="continueAdd">继续添加</el-button>
+                 @click="continueAdd"
+                 v-loading="loading">继续添加</el-button>
       <el-button type="primary"
-                 @click="submit">提交</el-button>
+                 @click="submit"
+                 v-loading="loading">提交</el-button>
       <el-button @click="close">取消</el-button>
     </span>
   </el-dialog>
 </template>
 <script>
 import modalMixins from '@/mixins/modalMixins'
+import api from '@/api'
+
 export default {
   props: {
     goodId: {
@@ -204,6 +212,7 @@ export default {
   },
   mixins: [modalMixins],
   data: () => ({
+    loading: false,
     imageUrl: '',
     form: {
       isOpen: '1',
@@ -212,15 +221,39 @@ export default {
     },
     options: [],
     rules: {
-      name: [{ required: true, message: '请输入商品名称' }],
-      no: [{ required: true, message: '请输入商品货号' }]
+      goodsName: [{ required: true, message: '请输入商品名称' }],
+      goodsCode: [{ required: true, message: '请输入商品货号' }]
     }
   }),
   computed: {
   },
   methods: {
-    continueAdd () { },
-    submit () { },
+    continueAdd () {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.loading = true
+          api.addGood(this.form).then(() => {
+            this.$message.success(`${goodId ? '编辑' : '新增'}商品成功`)
+            this.form = {}
+          }).finally(() => {
+            this.loading = false
+          })
+        }
+      })
+    },
+    submit () {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.loading = true
+          api.addGood(this.form).then(() => {
+            this.$message.success(`${goodId ? '编辑' : '新增'}商品成功`)
+            this.close()
+          }).finally(() => {
+            this.loading = false
+          })
+        }
+      })
+    },
     handleAvatarSuccess (res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
     },
