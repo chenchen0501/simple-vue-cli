@@ -5,7 +5,7 @@
            text-color="#fff"
            background-color="#000c17"
            active-text-color="#fff"
-           class="el-menu-vertical-demo"
+           class="el-menu-container"
            :collapse="isCollapse">
     <el-menu-item index="0"
                   class="logo-menu-item">
@@ -67,7 +67,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.el-menu-vertical-demo {
+.el-menu-container {
   height: 100%;
   &:not(.el-menu--collapse) {
     width: 200px;
