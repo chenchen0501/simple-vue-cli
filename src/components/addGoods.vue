@@ -73,19 +73,6 @@
                              v-model="form.stockWarning"></el-input-number>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
-          <el-form-item label="仓库">
-            <!-- todo -->
-            <el-select v-model="form.type"
-                       placeholder="请选择">
-              <el-option v-for="item in options"
-                         :key="item.value"
-                         :label="item.label"
-                         :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
 
         <el-col :span="12">
           <el-form-item label="发货方式">
@@ -105,30 +92,11 @@
                              v-model="form.purchasePrice"></el-input-number>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
-          <el-form-item label="采购数量">
-            <!-- todo -->
-            <el-input-number class="full-width"
-                             v-model="form.num"></el-input-number>
-          </el-form-item>
-        </el-col>
+        
         <el-col :span="12">
           <el-form-item label="供应商">
             <el-input v-model="form.supplierName"
                       placeholder="请输入供应商"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="发货地">
-            <!-- todo -->
-            <el-select v-model="form.type"
-                       placeholder="请选择">
-              <el-option v-for="item in options"
-                         :key="item.value"
-                         :label="item.label"
-                         :value="item.value">
-              </el-option>
-            </el-select>
           </el-form-item>
         </el-col>
 
@@ -151,16 +119,6 @@
           </el-form-item>
         </el-col>
 
-        <el-col :span="12">
-          <el-form-item label="创建产品时间">
-            <!-- todo -->
-            <el-date-picker v-model="form.date"
-                            type="date"
-                            style="width: 100%"
-                            placeholder="选择日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
         <el-col :span="12">
           <el-form-item label="状态">
             <el-radio v-model="form.status"

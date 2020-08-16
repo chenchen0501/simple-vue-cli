@@ -36,19 +36,19 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="库存">
-            <el-select v-model="listQuery.inventory"
-                       placeholder="请选择分类">
-              <el-option v-for="item in inventoryArr"
-                         :value="item.value"
-                         :key="item.value"
-                         :label="item.label"></el-option>
-            </el-select>
+            <el-input-number v-model="listQuery.stockNumber"
+                             :preceision="0"
+                             :min="0"
+                             style="width: 100%">
+            </el-input-number>
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item>
-            <el-checkbox v-model="listQuery.noStore">过滤无库存</el-checkbox>
-            <el-checkbox v-model="listQuery.storeWarning">库存预警</el-checkbox>
+            <el-radio v-model="listQuery.warningFlag"
+                      :label="1">过滤无库存</el-radio>
+            <el-radio v-model="listQuery.warningFlag"
+                      :label="2">库存预警</el-radio>
           </el-form-item>
         </el-col>
       </el-row>
@@ -133,6 +133,9 @@ export default {
   components: { checkMoal },
   mixins: [tableMixins],
   data: () => ({
+    listQuery: {
+      warningFlag: [1]
+    },
     inventoryArr: [],
     typeArr: [],
     storeArr: [],

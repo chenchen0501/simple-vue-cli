@@ -190,7 +190,7 @@
                      @current-change="handleCurrentChange">
       </el-pagination>
     </div>
-    <SelectGoods :visible="visible"
+    <addGoods :visible="visible"
                  :goodId="goodId"
                  @close="visible = false" />
     <sellModal :visible="sellVisible"
@@ -199,10 +199,10 @@
 </template>
 <script>
 import tableMixins from '@/mixins/tableMixins'
-import SelectGoods from '@/components/selectGoods'
+import addGoods from '@/components/addGoods'
 import sellModal from './sellModal'
 export default {
-  components: { SelectGoods, sellModal },
+  components: { addGoods, sellModal },
   mixins: [tableMixins],
   data: () => ({
     goodId: '',

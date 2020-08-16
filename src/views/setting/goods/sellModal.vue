@@ -54,10 +54,9 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="商品分类"
-                            prop="name">
-                <!-- todo -->
-                <el-select v-model="form.type"
+              <el-form-item label="商品货号"
+                            prop="goodsCode">
+                <el-select v-model="form.goodsCode"
                            placeholder="请选择">
                   <el-option v-for="item in options"
                              :key="item.value"
@@ -96,9 +95,8 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="订单状态"
-                            prop="name">
-                <!-- todo -->
-                <el-select v-model="form.type"
+                            prop="orderStatusId">
+                <el-select v-model="form.orderStatusId"
                            placeholder="请选择">
                   <el-option v-for="item in options"
                              :key="item.value"
@@ -156,20 +154,12 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="客服"
-                            prop="no">
-                <!-- todo -->
+                            prop="csId">
                 <el-input placeholder="请输入客服"
-                          v-model="form.no"></el-input>
+                          v-model="form.csId"></el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="12">
-              <el-form-item label="产品开发"
-                            prop="name">
-                <!-- todo -->
-                <el-input placeholder="请输入产品开发"
-                          v-model="form.name"></el-input>
-              </el-form-item>
-            </el-col>
+
             <el-col :span="12">
               <el-form-item label="备注"
                             prop="no">
@@ -217,45 +207,9 @@
             <el-col :span="12">
               <el-form-item label="收件人"
                             class="redLabel"
-                            prop="name">
-                <!-- todo -->
+                            prop="addresseeId">
                 <el-input placeholder="请输入收件人"
-                          v-model="form.name"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="邮编"
-                            class="redLabel"
-                            prop="no">
-                <!-- todo -->
-                <el-input placeholder="请输入邮编"
-                          v-model="form.no"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="地址"
-                            class="redLabel"
-                            prop="name">
-                <!-- todo -->
-                <el-input placeholder="请输入地址"
-                          v-model="form.name"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="手机"
-                            class="redLabel"
-                            prop="no">
-                <!-- todo -->
-                <el-input placeholder="请输入手机号"
-                          v-model="form.no"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="片甲名"
-                            prop="name">
-                <!-- todo -->
-                <el-input placeholder="请输入片甲名"
-                          v-model="form.name"></el-input>
+                          v-model="form.addresseeId"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
