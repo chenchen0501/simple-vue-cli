@@ -1,5 +1,5 @@
 {
-"name": "order",
+  "name": "order",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -33,6 +33,7 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "lint-staged": "^10.2.11",
+    "lodash": "^4.17.20",
     "node-sass": "^4.14.1",
     "pre-commit": "^1.2.2",
     "prettier": "^1.19.1",

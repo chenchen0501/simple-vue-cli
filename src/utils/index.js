@@ -1,8 +1,8 @@
 import ls from "@/utils/localStorage";
 
-export const getToken = () => ls.get("token");
+export const getToken = () => ls.get("cc_vue_token");
 
-export const removeToken = () => ls.remove("token");
+export const removeToken = () => ls.remove("cc_vue_token");
 
 export const clearLs = () => localStorage.clear();
 

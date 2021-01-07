@@ -24,7 +24,7 @@ router.beforeEach((to, from, next) => {
                   meta: {
                     title: "首页"
                   },
-                  component: () => import("../views/home.vue")
+                  component: () => import("../views/dashbord.vue")
                 },
                 ...routes
               ]
