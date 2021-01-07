@@ -25,17 +25,17 @@ export default {
         // api
         //   .login(signInfo)
         //   .then(() => {
-            // 清楚所有缓存
-            ls.clear();
+        // 清楚所有缓存
+        ls.clear();
 
-            // 设置token
-            ls.set("token", "qqweqweqweqweqweqw");
+        // 设置token
+        ls.set("cc_vue_token", "qqweqweqweqweqweqw");
 
-            resolve();
-          // })
-          // .catch(() => {
-          //   reject();
-          // });
+        resolve();
+        // })
+        // .catch(() => {
+        //   reject();
+        // });
       });
     },
 
