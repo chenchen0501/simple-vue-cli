@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- 测试loadmore指令 -->
+    <h1>测试loadmore指令</h1>
     <el-select
       v-model="value"
       v-loadmore="loadMore"
@@ -21,7 +23,8 @@ export default {
   }),
   methods: {
     loadMore() {
-      console.log('222')
+      // 加载更多数据
+      console.log('加载更多数据')
     }
   }
 };
