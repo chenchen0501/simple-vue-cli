@@ -64,7 +64,9 @@ export default {
             return
           }
           api.registry(this.form).then(res => {
-            console.log(res)
+            this.$message.success('注册成功')
+            ls.set("token", res.data);
+            this.$router.replace("/main");
           })
         }
       })

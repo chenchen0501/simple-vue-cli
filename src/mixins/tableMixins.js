@@ -1,8 +1,10 @@
 export default {
   data: () => ({
     tableLoading: false, // 列表loading
-    listQuery: {}, // 查询条件
-    listParams: {}, // 分页条件
+    listQuery: {
+      pageNo: 1,
+      pageSize: 10
+    }, // 查询条件
     total: 0, // 查询结果总条数
     tableData: [],
     tableFn: () => {},
@@ -15,44 +17,45 @@ export default {
   methods: {
     // 查询（根据当前查询条件查询）
     getData() {
-      this.tableLoading = true
-      this.tableFn(this.listQuery, this.listParams)
+      this.tableLoading = true;
+      this.tableFn(this.listQuery)
         .then(res => {
-          const { data, size, current, total } = res || {}
-          this.listParams = {
-            size,
-            current
-          }
-          this.total = total
-          this.tableData = data
+          const {
+            data: { list, count }
+          } = res || {};
+          this.total = count;
+          this.tableData = list;
         })
         .finally(() => {
-          this.tableLoading = false
-        })
+          this.tableLoading = false;
+        });
     },
 
     // 从第一页开始查询
     handleFilter() {
-      this.listParams.current = 1
-      this.getData()
+      this.listQuery.pageNo = 1;
+      this.getData();
     },
 
     // 重置
     reset() {
-      this.listQuery = {}
-      this.getData()
+      this.listQuery = {
+        pageSize: 10,
+        pageNo: 1
+      };
+      this.getData();
     },
 
     // 每页条数变化
     handleSizeChange(val) {
-      this.listParams.size = val
-      this.getData()
+      this.listQuery.pageSize = val;
+      this.getData();
     },
 
     // 页码变化
     handleCurrentChange(val) {
-      this.listParams.current = val
-      this.getData()
+      this.listQuery.pageNo = val;
+      this.getData();
     }
   }
-}
+};
