@@ -12,6 +12,8 @@
         :multiple="isMultiple"
         :filter-method="filterMethod"
         placeholder="请选择"
+        @remove-tag="removeTag"
+        @clear="selectClear"
       >
         <el-option
           :value="1"
@@ -110,7 +112,7 @@ export default {
     // 是否多选
     isMultiple: {
       type: Boolean,
-      default: () => false,
+      default: () => true,
     },
 
     // 默认Props
@@ -119,14 +121,15 @@ export default {
       default: () => ({
         children: "children",
         label: "label",
-        disabled: (item) => {
-          return true;
-        },
+        // disabled: (item) => {
+        //   return true;
+        // },
       }),
     },
   },
   data() {
     return {
+      allCheckedNodes: [],
       // 被选中的值
       selectedValue: [],
       selectedLabel: this.isMultiple ? [] : "",
@@ -219,9 +222,17 @@ export default {
     // this.initData();
   },
   methods: {
-    // disabledFn(a, b) {
-    //   console.log("disabled", a, b);
-    // },
+    // 清空
+    selectClear() {
+      this.$refs.tree.setCheckedKeys([]);
+    },
+
+    // 多选移除
+    removeTag(val) {
+      let removeTag = this.allCheckedNodes.filter((item) => item.label === val);
+      this.$refs.tree.setChecked(removeTag[0].value, false);
+    },
+
     // tree模糊搜索
     filterNode(value, data) {
       if (!value) return true;
@@ -235,22 +246,23 @@ export default {
     // 复选框被选中fn
     checkChange() {
       // console.log(this.$refs.tree.getCheckedNodes());
-      let allCheckedNodes = this.$refs.tree.getCheckedNodes();
+      this.allCheckedNodes = this.$refs.tree.getCheckedNodes();
 
       if (this.valueConsistsOf === "leaf") {
-        this.selectedValue = allCheckedNodes
+        this.selectedValue = this.allCheckedNodes
           .filter((item) => !item.children)
           .map((item) => item.value);
-        this.selectedLabel = allCheckedNodes
+        this.selectedLabel = this.allCheckedNodes
           .filter((item) => !item.children)
           .map((item) => item.label);
       }
       if (this.valueConsistsOf === "all") {
-        this.selectedValue = allCheckedNodes.map((item) => item.value);
-        this.selectedLabel = allCheckedNodes.map((item) => item.label);
+        this.selectedValue = this.allCheckedNodes.map((item) => item.value);
+        this.selectedLabel = this.allCheckedNodes.map((item) => item.label);
       }
     },
 
+    // 初始化
     initData() {
       // 默认值返显
       if (this.isMultiple) {
@@ -263,14 +275,15 @@ export default {
       }
     },
 
+    // 单选点击选择
     handleNodeClick(data) {
       if (this.isMultiple) return;
       let { label, children } = data;
       if (!children || (Array.isArray(children) && children.length === 0)) {
         this.selectedLabel = label;
-        return
+        return;
       }
-      this.$message.warning('只能选择叶子节点 ！')
+      this.$message.warning("只能选择叶子节点 ！");
       // console.log(data);
     },
   },
