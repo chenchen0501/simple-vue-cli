@@ -24,7 +24,7 @@
             :show-checkbox="isMultiple"
             node-key="value"
             :default-checked-keys="defaultCheckedKeys"
-            :data="data"
+            :data="options"
             :filter-node-method="filterNode"
             :expand-on-click-node="false"
             :props="props"
@@ -96,6 +96,11 @@ const getAllLeafNodes = (data) => {
 
 export default {
   props: {
+    // 数据源
+    options: {
+      type: Array,
+      default: () => []
+    },
     // 自定义值类型
     // 'all' - 所有父子节点值都包含在value中
     //  'leaf' - 只有叶子节点会包含在内
@@ -133,81 +138,81 @@ export default {
       // 被选中的值
       selectedValue: [],
       selectedLabel: this.isMultiple ? [] : "",
-      data: [
-        {
-          label: "一级 1",
-          value: 1,
-          disabled: true,
-          children: [
-            {
-              label: "二级 1-1",
-              value: 11,
-              children: [
-                {
-                  label: "三级 1-1-1",
-                  value: 111,
-                },
-                {
-                  label: "三级 1-1-2",
-                  value: 112,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          label: "一级 2",
-          value: 2,
-          children: [
-            {
-              label: "二级 2-1",
-              value: 21,
-              children: [
-                {
-                  label: "三级 2-1-1",
-                  value: 211,
-                },
-              ],
-            },
-            {
-              label: "二级 2-2",
-              value: 22,
-              children: [
-                {
-                  label: "三级 2-2-1",
-                  value: 221,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          label: "一级 3",
-          value: 3,
-          children: [
-            {
-              label: "二级 3-1",
-              value: 31,
-              children: [
-                {
-                  label: "三级 3-1-1",
-                  value: 311,
-                },
-              ],
-            },
-            {
-              label: "二级 3-2",
-              value: 32,
-              children: [
-                {
-                  label: "三级 3-2-1",
-                  value: 321,
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      // data: [
+      //   {
+      //     label: "一级 1",
+      //     value: 1,
+      //     disabled: true,
+      //     children: [
+      //       {
+      //         label: "二级 1-1",
+      //         value: 11,
+      //         children: [
+      //           {
+      //             label: "三级 1-1-1",
+      //             value: 111,
+      //           },
+      //           {
+      //             label: "三级 1-1-2",
+      //             value: 112,
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     label: "一级 2",
+      //     value: 2,
+      //     children: [
+      //       {
+      //         label: "二级 2-1",
+      //         value: 21,
+      //         children: [
+      //           {
+      //             label: "三级 2-1-1",
+      //             value: 211,
+      //           },
+      //         ],
+      //       },
+      //       {
+      //         label: "二级 2-2",
+      //         value: 22,
+      //         children: [
+      //           {
+      //             label: "三级 2-2-1",
+      //             value: 221,
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     label: "一级 3",
+      //     value: 3,
+      //     children: [
+      //       {
+      //         label: "二级 3-1",
+      //         value: 31,
+      //         children: [
+      //           {
+      //             label: "三级 3-1-1",
+      //             value: 311,
+      //           },
+      //         ],
+      //       },
+      //       {
+      //         label: "二级 3-2",
+      //         value: 32,
+      //         children: [
+      //           {
+      //             label: "三级 3-2-1",
+      //             value: 321,
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //   },
+      // ],
     };
   },
   computed: {
@@ -219,6 +224,10 @@ export default {
     },
   },
   mounted() {
+    let obj = {
+      a: 1
+    }
+    console.log('test', obj?.a, obj?.b)
     // this.initData();
   },
   methods: {

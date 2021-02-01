@@ -2,7 +2,7 @@
 import ls from "@/utils/localStorage";
 import { asyncRoutes as allRoutes } from "@/router/routes";
 import { filterRoutes } from "@/utils";
-import api from "@/api";
+// import api from "@/api";
 
 export default {
   namespaced: true,
@@ -14,6 +14,7 @@ export default {
   }),
   mutations: {
     setUserInfo(state, userInfo) {
+      console.log('in setUserInfo')
       ls.set("userInfo", userInfo);
       state.userInfo = userInfo;
     }
