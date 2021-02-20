@@ -9,6 +9,9 @@ import '@/utils/directive' // 自定义指令
 import '@/styles/init.scss'
 import '@/styles/global.scss'
 import '@/utils/permission'
+import VueParticles from 'vue-particles'
+
+Vue.use(VueParticles)
 
 Vue.use(ElementUI, {
   size: 'mini'

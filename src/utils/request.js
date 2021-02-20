@@ -4,22 +4,35 @@ import { Message } from "element-ui";
 // import store from '@/store'
 import router from "../router";
 import qs from "qs";
-import ls from '@/utils/localStorage'
+import ls from "@/utils/localStorage";
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASEURL,
   timeout: 10000 // 请求超时设置
 });
 
+// 判断是否为文件下载
+let isFile = false;
+
 // request拦截器
 service.interceptors.request.use(config => {
   config.headers["token"] = getToken();
+
+  if (config.responseType === "blob") {
+    isFile = true;
+  }
+
   return config;
 });
 
 // response拦截器
 service.interceptors.response.use(
   response => {
+    if (isFile) {
+      return response;
+    }
+
+    // 以下判断根据后端具体响应值进行更改
     const { status } = response.data;
     const msg = response.data && response.data.message;
 
@@ -29,7 +42,7 @@ service.interceptors.response.use(
     }
 
     if (status === "0007") {
-      this.$message.error('登录过期，请重新登录')
+      this.$message.error("登录过期，请重新登录");
       ls.clear();
       router.replace({ path: "/login" });
       return Promise.reject(msg);

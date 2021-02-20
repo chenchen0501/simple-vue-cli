@@ -1,5 +1,7 @@
 <template>
-  <div>a1</div>
+  <div class="container">
+    a1
+  </div>
 </template>
 <script>
 import { mapMutations, mapState } from "vuex";
@@ -21,7 +23,7 @@ export default {
     this.initData();
   },
   methods: {
-    ...mapMutations('user', ['setUserInfo']),
+    ...mapMutations("user", ["setUserInfo"]),
     initData() {
       // console.log("test store", this.userInfo, this.sideBarWidth);
     },

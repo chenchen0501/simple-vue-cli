@@ -1,5 +1,23 @@
 <template>
   <div class="login-container">
+    <vue-particles
+      class="vue-particles"
+      color="#dedede"
+      :particle-opacity="0.7"
+      :particles-number="80"
+      shape-type="star"
+      :particle-size="4"
+      lines-color="#dedede"
+      :lines-width="1"
+      :line-linked="true"
+      :line-opacity="0.4"
+      :lines-distance="150"
+      :move-speed="3"
+      :hover-effect="true"
+      hover-mode="grab"
+      :click-effect="true"
+      click-mode="push"
+    />
     <div class="login-area">
       <el-form
         ref="form"
@@ -71,6 +89,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.vue-particles {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 /deep/ .el-input--mini .el-input__inner {
   height: 35px;
 }
@@ -84,6 +110,7 @@ export default {
   align-items: center;
   height: 100vh;
   .login-area {
+    z-index: 999;
     .title {
       color: #fff;
       margin-bottom: 30px;

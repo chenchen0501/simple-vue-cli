@@ -31,3 +31,21 @@ export const importAll = context => {
   })
   return map
 }
+
+// 文件下载 - (不传文件名则取后端定义的文件名, 规定第一个参数为blob格式的数据)
+export const downloadFile = ({ data, headers }, fileName) => {
+  const name = fileName || headers['content-disposition'].split('filename=')[1]
+  // 支持IE浏览器
+  if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(data, name)
+    return
+  }
+  const url = window.URL.createObjectURL(data)
+  const link = document.createElement('a')
+  link.style.display = 'none'
+  link.href = url
+  link.setAttribute('download', name)
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}

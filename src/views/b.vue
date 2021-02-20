@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <!-- 测试树形下拉 -->
     <div style="margin-bottom: 20px">
       <h1>测试树形下拉</h1>
@@ -24,7 +24,7 @@
             :show-checkbox="isMultiple"
             node-key="value"
             :default-checked-keys="defaultCheckedKeys"
-            :data="options"
+            :data="data"
             :filter-node-method="filterNode"
             :expand-on-click-node="false"
             :props="props"
@@ -37,6 +37,31 @@
   </div>
 </template>
 <script>
+// 格式化树形数据
+const formateTreeData = (
+  data,
+  props = { value: "value1", label: "label1", children: "children1" }
+) => {
+  let options = JSON.parse(JSON.stringify(data));
+  if (!Array.isArray(options)) return [];
+
+  for (let item of options) {
+    for (let prop in props) {
+      if (prop === "children") {
+        if (Array.isArray(item[props[prop]]) && item[props[prop]].length) {
+          item[prop] = formateTreeData(item[props[prop]]);
+        }
+      } else {
+        item[prop] = item[props[prop]];
+      }
+
+      delete item[props[prop]];
+    }
+  }
+
+  return options;
+};
+
 // 查找目标value，在树中的对象Obj
 const findInTreeData = (ids, data) => {
   if (!Array.isArray(data)) return;
@@ -60,7 +85,7 @@ const findInTreeData = (ids, data) => {
     for (let item of data) {
       let { value, children, label } = item;
       if (value === ids) {
-        goal = label;
+        goal = item;
         break;
       } else {
         if (children && Array.isArray(children) && children.length) {
@@ -99,7 +124,7 @@ export default {
     // 数据源
     options: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     // 自定义值类型
     // 'all' - 所有父子节点值都包含在value中
@@ -138,81 +163,81 @@ export default {
       // 被选中的值
       selectedValue: [],
       selectedLabel: this.isMultiple ? [] : "",
-      // data: [
-      //   {
-      //     label: "一级 1",
-      //     value: 1,
-      //     disabled: true,
-      //     children: [
-      //       {
-      //         label: "二级 1-1",
-      //         value: 11,
-      //         children: [
-      //           {
-      //             label: "三级 1-1-1",
-      //             value: 111,
-      //           },
-      //           {
-      //             label: "三级 1-1-2",
-      //             value: 112,
-      //           },
-      //         ],
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     label: "一级 2",
-      //     value: 2,
-      //     children: [
-      //       {
-      //         label: "二级 2-1",
-      //         value: 21,
-      //         children: [
-      //           {
-      //             label: "三级 2-1-1",
-      //             value: 211,
-      //           },
-      //         ],
-      //       },
-      //       {
-      //         label: "二级 2-2",
-      //         value: 22,
-      //         children: [
-      //           {
-      //             label: "三级 2-2-1",
-      //             value: 221,
-      //           },
-      //         ],
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     label: "一级 3",
-      //     value: 3,
-      //     children: [
-      //       {
-      //         label: "二级 3-1",
-      //         value: 31,
-      //         children: [
-      //           {
-      //             label: "三级 3-1-1",
-      //             value: 311,
-      //           },
-      //         ],
-      //       },
-      //       {
-      //         label: "二级 3-2",
-      //         value: 32,
-      //         children: [
-      //           {
-      //             label: "三级 3-2-1",
-      //             value: 321,
-      //           },
-      //         ],
-      //       },
-      //     ],
-      //   },
-      // ],
+      data: [
+        {
+          label1: "一级 1",
+          value1: 1,
+          disabled: true,
+          children1: [
+            {
+              label1: "二级 1-1",
+              value1: 11,
+              children1: [
+                {
+                  label1: "三级 1-1-1",
+                  value1: 111,
+                },
+                {
+                  label1: "三级 1-1-2",
+                  value1: 112,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "一级 2",
+          value: 2,
+          children: [
+            {
+              label: "二级 2-1",
+              value: 21,
+              children: [
+                {
+                  label: "三级 2-1-1",
+                  value: 211,
+                },
+              ],
+            },
+            {
+              label: "二级 2-2",
+              value: 22,
+              children: [
+                {
+                  label: "三级 2-2-1",
+                  value: 221,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "一级 3",
+          value: 3,
+          children: [
+            {
+              label: "二级 3-1",
+              value: 31,
+              children: [
+                {
+                  label: "三级 3-1-1",
+                  value: 311,
+                },
+              ],
+            },
+            {
+              label: "二级 3-2",
+              value: 32,
+              children: [
+                {
+                  label: "三级 3-2-1",
+                  value: 321,
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
   },
   computed: {
@@ -224,11 +249,11 @@ export default {
     },
   },
   mounted() {
-    let obj = {
-      a: 1
-    }
-    console.log('test', obj?.a, obj?.b)
-    // this.initData();
+    // let obj = {
+    //   a: 1
+    // }
+    // console.log('test', obj?.a, obj?.b)
+    this.initData();
   },
   methods: {
     // 清空
@@ -273,11 +298,15 @@ export default {
 
     // 初始化
     initData() {
+      console.log("init", formateTreeData(this.data));
+      // console.log("init", findInTreeData([31, 321], this.data).map(item => item.label));
       // 默认值返显
       if (this.isMultiple) {
         this.checkChange();
       } else {
-        let initSelectVal = findInTreeData(this.value, this.data);
+        let initSelectVal = findInTreeData(this.value, this.data).map(
+          (item) => item.label
+        );
         if (initSelectVal) {
           this.selectedLabel = initSelectVal;
         }
@@ -286,6 +315,8 @@ export default {
 
     // 单选点击选择
     handleNodeClick(data) {
+      console.log(label, getAllLeafNodes(data));
+
       if (this.isMultiple) return;
       let { label, children } = data;
       if (!children || (Array.isArray(children) && children.length === 0)) {
@@ -293,7 +324,6 @@ export default {
         return;
       }
       this.$message.warning("只能选择叶子节点 ！");
-      // console.log(data);
     },
   },
 };

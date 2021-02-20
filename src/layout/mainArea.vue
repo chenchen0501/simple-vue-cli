@@ -2,7 +2,7 @@
 
 <template>
   <div class="container">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -13,6 +13,6 @@
   background-color: #fff;
   border-radius: 10px;
   padding: 10px;
-  overflow: auto;
+  // overflow: auto;
 }
 </style>

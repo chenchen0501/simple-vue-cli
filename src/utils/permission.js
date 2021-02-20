@@ -5,6 +5,7 @@ import data from '@/utils/data'
 
 router.beforeEach((to, from, next) => {
   // clearLs()
+  
   if (getToken()) {
     if (to.path === "/login") {
       next("/main");

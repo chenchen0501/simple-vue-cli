@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <!-- 测试loadmore指令 -->
     <h1>测试loadmore指令</h1>
     <el-select
@@ -24,8 +24,8 @@ export default {
   methods: {
     loadMore() {
       // 加载更多数据
-      console.log('加载更多数据')
-    }
-  }
+      console.log("加载更多数据");
+    },
+  },
 };
 </script>
