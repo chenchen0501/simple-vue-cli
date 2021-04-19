@@ -14,7 +14,7 @@ export default {
   }),
   mutations: {
     setUserInfo(state, userInfo) {
-      console.log('in setUserInfo')
+      console.log("in setUserInfo");
       ls.set("userInfo", userInfo);
       state.userInfo = userInfo;
     }
@@ -59,7 +59,12 @@ export default {
           commit("setUserInfo", userInfo);
           currentUserInfo = userInfo;
         }
+
+        // console.log('allRoutes', allRoutes)
+        // console.log('currentUserInfo.routes', currentUserInfo.routes)
+
         const routes = filterRoutes(allRoutes, currentUserInfo.routes);
+
         resolve({ ...currentUserInfo, routes });
       });
     }

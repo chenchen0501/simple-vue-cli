@@ -13,7 +13,8 @@
   </div>
 </template>
 <script>
-import VueTreeSelect from "@/components/VueTreeSelect";
+import VueTreeSelect from 'el-vue-select'
+// import VueTreeSelect from "@/components/VueTreeSelect";
 export default {
   components: {
     VueTreeSelect,

@@ -4,7 +4,10 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapState } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+
+const { mapState } = createNamespacedHelpers("global");
+
 export default {
   data() {
     return {};
@@ -16,16 +19,17 @@ export default {
     //     return state.user.userInfo;
     //   },
     // }),
-    ...mapState("user", ["userInfo"]),
-    ...mapState("global", ["sideBarWidth"]),
+    // ...mapState("user", ["userInfo"]),
+    ...mapState(["sideBarWidth"]),
+    // ...mapState({ test1: "test1" }),
   },
   created() {
     this.initData();
   },
   methods: {
-    ...mapMutations("user", ["setUserInfo"]),
+    // ...mapMutations("user", ["setUserInfo"]),
     initData() {
-      // console.log("test store", this.userInfo, this.sideBarWidth);
+      console.log("test store", this.userInfo, this.sideBarWidth, this.test1);
     },
   },
 };

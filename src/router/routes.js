@@ -1,33 +1,42 @@
 // 动态的路由（这部分路由会根据权限变化，默认只有两层路由）
 export const asyncRoutes = [
   {
-    path: '/main/a',
-    name: 'a',
-    icon: 'el-icon-shopping-cart-2',
+    path: "/main/a",
+    name: "a",
+    icon: "el-icon-shopping-cart-2",
     meta: {
-      title: 'a页面'
+      title: "a页面"
     },
-    component: () => import('../views/a.vue'),
+    component: () => import("../views/a.vue"),
     children: [
       {
-        path: '/main/a/a1',
-        name: 'a1',
+        path: "/main/a/a1",
+        name: "a1",
         meta: {
-          title: 'a1页面'
+          title: "a1页面"
         },
-        component: () => import('../views/a1.vue')
+        component: () => import("../views/a1.vue")
       }
     ]
   },
   {
-    path: '/main/b',
-    name: 'b',
-    icon: 'el-icon-location',
+    path: "/main/b",
+    name: "b",
+    icon: "el-icon-location",
     meta: {
-      title: 'b页面'
+      title: "b页面"
     },
-    component: () => import('../views/b.vue')
+    component: () => import("../views/b.vue")
   },
+  {
+    path: "/main/c",
+    name: "c",
+    icon: "el-icon-location",
+    meta: {
+      title: "c页面"
+    },
+    component: () => import("../views/c.vue")
+  }
 ];
 
 export default [
@@ -35,7 +44,7 @@ export default [
     path: "/",
     name: "/",
     redirect: "/main",
-    component: () => import("@/layout"),
+    component: () => import("@/layout")
   },
   {
     path: "/login",

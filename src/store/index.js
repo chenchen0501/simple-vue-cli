@@ -5,5 +5,8 @@ import modules from './modules'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  state: {
+    test1: '123'
+  },
   modules
 });

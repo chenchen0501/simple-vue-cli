@@ -12,6 +12,8 @@ router.beforeEach((to, from, next) => {
     } else {
       if (!store.state.user.userInfo.routes.length) {
         store.dispatch("user/getCurrentUserInfo").then(({ routes }) => {
+          // console.log('routes', routes)
+
           router.addRoutes([
             {
               path: "/main",
