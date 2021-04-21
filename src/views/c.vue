@@ -31,12 +31,8 @@ export default {
           entries.forEach((entrie) => {
             if (entrie.isIntersecting) {
               const img = entrie.target;
-              console.log("in entrie", entrie);
-
               const src = img.getAttribute("data-src");
               img.setAttribute("src", src);
-
-              console.log("after img", img);
               observer.unobserve(img); // 停止监听已开始加载的图片
             }
           });

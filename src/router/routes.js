@@ -36,6 +36,15 @@ export const asyncRoutes = [
       title: "c页面"
     },
     component: () => import("../views/c.vue")
+  },
+  {
+    path: "/main/test-express",
+    name: "test-express",
+    icon: "el-icon-location",
+    meta: {
+      title: "测试express"
+    },
+    component: () => import("../views/test-express.vue")
   }
 ];
 
