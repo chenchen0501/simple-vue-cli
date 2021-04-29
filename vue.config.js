@@ -5,24 +5,9 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
-let publicDir = path.resolve('public')
-// console.log(publicDir)
-
-let workerPath = path.resolve(publicDir, 'imgs')
-
 module.exports = {
   lintOnSave: false,
   chainWebpack: config => {
-    // config.plugin("copy").use(require("copy-webpack-plugin"), [
-    //   [
-    //     {
-    //       from: workerPath,
-    //       to: "./imgs"
-    //       // ignore: publicCopyIgnore
-    //     }
-    //   ]
-    // ]);
-    // set svg-sprite-loader
     config.module
       .rule("svg")
       .exclude.add(resolve("src/assets/icons"))

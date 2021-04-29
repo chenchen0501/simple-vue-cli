@@ -45,6 +45,15 @@ export const asyncRoutes = [
       title: "测试express"
     },
     component: () => import("../views/test-express.vue")
+  },
+  {
+    path: "/main/test-markdown",
+    name: "test-markdown",
+    icon: "el-icon-location",
+    meta: {
+      title: "测试markdown"
+    },
+    component: () => import("../views/test-markdown.vue")
   }
 ];
 
