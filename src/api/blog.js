@@ -4,7 +4,7 @@ export default {
   // 获取博客详情
   getBlogInfoById: id => {
     return request.get({
-      url: `/blog/detail/${id}`
+      url: `/blog/getFile`,
     });
   }
 };
